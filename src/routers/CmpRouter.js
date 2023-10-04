@@ -34,7 +34,7 @@ export const CmpRouter = () => {
                                 component={ Form }
                             />
 
-                            <Redirect to="/register"/>
+                            <Redirect to="/form"/>
                         </Switch>
                     </div>
                     <div className='footer'>

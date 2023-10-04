@@ -11,7 +11,6 @@ export const Register = () => {
 
     const { data } = formValues;
 
-    console.log(data);
   return (
     <>
         <h2>Registrar Asistencia</h2>
