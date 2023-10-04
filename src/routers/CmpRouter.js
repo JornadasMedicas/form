@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 /* import { GenerateQR } from '../components/GenerateQR' */
 import { Register } from '../components/Register';
 import { Form } from '../components/Form';
-
+import img from '../assets/banner.png';
 export const CmpRouter = () => {
   return (
     <main>
@@ -12,7 +12,7 @@ export const CmpRouter = () => {
                 <div className='col-sm-12 pt-3 card'>
                     <h1 className='fonts'><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
                     <div className='jornadas' style={{padding: 0, margin: 0}}>
-                        <img src="banner.png" title="source: imgur.com" alt="Jornadas" width="100%" height="300px"/>
+                        <img src={ img } title="source: imgur.com" alt="Jornadas" width="100%" height="300px"/>
                     </div>
                     <div className='mt-3'>
                         <Switch>
