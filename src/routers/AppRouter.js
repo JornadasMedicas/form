@@ -5,7 +5,7 @@ import {
     Route,
     Redirect
   } from 'react-router-dom';
-import { Main } from '../components/Main';
+import { CmpRouter } from './CmpRouter';
 
 export const AppRouter = () => {
     return (
@@ -14,19 +14,10 @@ export const AppRouter = () => {
                 <Switch>
                     <Route 
                         path="/"
-                        exact
-                        component={ Main }
+                        component={ CmpRouter }
                     />
 
-                    {/* <Route 
-                        exact
-                        path="/"
-                        component={ JournalScreen }
-                    /> */}
-
                     <Redirect to="/"/>
-
-
                 </Switch>
             </div>
         </Router>
