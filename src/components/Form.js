@@ -48,13 +48,7 @@ export const Form = () => {
 					showConfirmButton: true
 				})
 				reset();
-			} else {
-				swal.fire({
-					icon: 'error',
-					title: 'Error desconocido',
-					text: 'Error desconocido',
-				});
-			}		
+			}	
 		} else {
 			setErrors(errors);
 			swal.fire({

@@ -19,6 +19,11 @@ export const saveRegistro = async (values) => {
             return false;
         }
     } catch( err ) {
+        swal.fire({
+            icon: 'error',
+            title: 'Error desconocido',
+            text: 'Error desconocido',
+        });
         return false;
     }
 }
