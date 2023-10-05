@@ -4,24 +4,49 @@ import useForm2 from '../hooks/useForm2'
 import swal from 'sweetalert2';
 import { initValuesFormJordana, initValuesFormJordanaErrors } from './initValues/initValuesFormJornada'
 import { validarFormatoCrearRegistro } from '../helpers/validarFormatos'
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 const modulos = [
 	'Medicina',
 	'Enfermería',
-	'Quimicos',
+	'Químicos',
 	'Estomatología'
 ]
 
 export const Form = () => {
+	const { values, handleInputChange, reset } = useForm2(initValuesFormJordana);
 	const [errors, setErrors] = useState(initValuesFormJordanaErrors);
-	const { values, handleInputChange } = useForm2(initValuesFormJordana);
+	const [visible, setVisible] = useState('none');
+
+	const enableButton = () => {
+		swal.fire({
+			title: 'IMPORTANTE',
+			html: 'Verifique muy bien sus datos antes de enviar el formulario. Su constancia de participación será enviada a su correo electrónico con los datos proporcionados al finalizar el evento. <hr><b>¡El Centro de Alta Especialidad Dr. Rafael Lucio no se hace responsable por datos mal proporcionados!<b>',
+			icon: 'warning',
+			confirmButtonColor: '#fbb373',
+			confirmButtonText: 'Entendido'
+		  })
+		setVisible('inline-block');
+	}
+
+	const disableButton = () => {
+		setVisible('none');
+	}
 
 	const handleSubmit = () => {
 		setErrors(initValuesFormJordanaErrors);
 		const { isOK, errors } = validarFormatoCrearRegistro(values);
 		if (isOK) {
-			alert('VA PARA ARRIBA');
+			console.log(values);
+			swal.fire({
+				icon: 'success',
+				title: 'Su registro se ha realizado correctamente',
+				html: 'Su pase de entrada (código QR) se enviará a su correo electrónico antes del evento. <hr><b>No olvide llevarlo consigo pues será su registro de asistencia.<b>',
+				showConfirmButton: true
+			  })
+
+			  reset();
 		} else {
 			setErrors(errors);
 			swal.fire({
@@ -32,7 +57,6 @@ export const Form = () => {
 			});
 		}
 	}
-
 	const handleInputChangeGrupo = (e, newValue) => {
 		if (newValue) {
 			handleInputChange(newValue, 'modulo');
@@ -44,12 +68,12 @@ export const Form = () => {
 
 	return (
 		<>
-			<Box sx={{ p: 2, marginBottom: '80px' }}>
+			<Box sx={{ p: 2, marginBottom: '80px'}}>
 				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara- Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
 				{/* <Divider sx={{}}/> */}
 				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 14 }}>
 					<b>Los datos registrados se usarán para la realización y envío de su constancia digital.</b> {' '}
-					Su constancia será enviada al finalizar el evento al correo electrónico proporcionado, favor de revisar la bandeja de spam, si presenta alguna inconsistencia reportarlo al Centro de Alta Especialidad DR. Rafael Lucio 228- 8144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
+					Su constancia será enviada al finalizar el evento al correo electrónico proporcionado, favor de revisar la bandeja de spam, si presenta alguna inconsistencia reportarlo al Centro de Alta Especialidad Dr. Rafael Lucio 228- 8144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
 				<hr />
 				<FormControl fullWidth sx={{ mt: 2 }}>
@@ -74,20 +98,21 @@ export const Form = () => {
 
 					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
 						<TextField
-							label='Matricula ( Solo personal CAE )'
+							label='Matrícula ( Solo para personal CAE )'
 							fullWidth
 							autoComplete='off'
-							value={values.matricula}
+							value={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? values.matricula='' : values.matricula}
 							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'matricula')}
 							error={errors.matricula?.error}
 							helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
 							inputProps={{ maxLength: 4 }}
+							disabled={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? true : false}
 						/>
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
 						<TextField
-							label='Acrónimo (C. / Dr. / L.E. / Q.C. /  Q.F.B. / Lic. / C.D. / etc)'
+							label='Acrónimo (C. / Dr. / L.E. / Q.C. /  Q.F.B. / Lic. / C.D. / etc - será utilizado para su constancia)'
 							fullWidth
 							autoComplete='off'
 							value={values.acronimo}
@@ -210,8 +235,16 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 3 }}>
-						<Button variant='contained' onClick={handleSubmit}>
+					<Grid item sm={12} xs={12} sx={{ mt: 3}}>
+						<ReCAPTCHA
+							sitekey={process.env.REACT_APP_SITE_KEY}
+							size='normal'
+							theme='light'
+							style={{width: '305px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px'}}
+							onChange={enableButton}
+							onExpired={disableButton}
+						/>
+						<Button className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{display: visible, backgroundColor: "#ca7757", ":hover": {backgroundColor: '#b7402a'}}}>
 							Enviar
 						</Button>
 					</Grid>
@@ -220,7 +253,7 @@ export const Form = () => {
 
 				<Typography sx={{mt: 3, textAlign: 'left', textDecoration: 'underline'}}>
 					¿Desea más Información?
-					Ponte en contacto con nosotros en la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs.
+					Ponerse en contacto con la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
 			</Box>
 		</>

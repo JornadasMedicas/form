@@ -18,8 +18,9 @@ function validateEmail( email ){
 
 export const validarFormatoCrearRegistro = ( values ) => {
     let errors = initValuesFormJordanaErrors;
+
     if( values.matricula.length > 0) {
-        if( values.matricula.length != 4 ) {
+        if( values.matricula.length !== 4 ) {
             errors = { ...errors, 'matricula': { ...errors.matricula, error: true, msg: "La matrícula no es válida"} }
         } else if( isNaN(values.matricula) ) {
             errors = { ...errors, 'matricula': { ...errors.matricula, error: true, msg: "La matrícula no es válida"} }
@@ -38,7 +39,7 @@ export const validarFormatoCrearRegistro = ( values ) => {
         errors = { ...errors, 'apellido': { ...errors.apellido, error: true } }
     }
 
-    if( values.rfc === '' || values.rfc.length != 13) {
+    if( values.rfc === '' || values.rfc.length !== 13) {
         errors = { ...errors, 'rfc': { ...errors.rfc, error: true } }
     }
 
@@ -48,7 +49,7 @@ export const validarFormatoCrearRegistro = ( values ) => {
 
     if( values.tel === '') {
         errors = { ...errors, 'tel': { ...errors.tel, error: true } }
-    } else if( values.tel.length != 10 ) {
+    } else if( values.tel.length !== 10 ) {
         errors = { ...errors, 'tel': { ...errors.tel, error: true, msg: "El numero telefónico es incorrecto (ej. 228XXXXXXX)"} }
     } else if( isNaN(values.tel) ) {
         errors = { ...errors, 'tel': { ...errors.tel, error: true, msg: "El numero telefónico es incorrecto (ej. 228XXXXXXX)"} }

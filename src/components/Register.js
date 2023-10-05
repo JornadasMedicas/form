@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from '../hooks/useForm'
 import { TableGrid } from './TableGrid'
 
@@ -10,7 +10,11 @@ export const Register = () => {
     })
 
     const { data } = formValues;
+    useEffect(() => {
+      reset();
 
+    }, [reset])
+    
   return (
     <>
         <h2>Registrar Asistencia</h2>

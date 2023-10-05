@@ -3,14 +3,13 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 /* import { GenerateQR } from '../components/GenerateQR' */
 import { Register } from '../components/Register';
 import { Form } from '../components/Form';
-/* import img from '../assets/banner.png'; */
 
 export const CmpRouter = () => {
   return (
     <main>
         <div className='container-fluid text-center'>
             <div className='row'>
-                <div className='col-sm-12 pt-3 card'>
+                <div className='col-sm-12 pt-3 card animate__animated animate__fadeIn'>
                     <h1 className='fonts'><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
                     <div className='jornadas' style={{padding: 0, margin: 0}}>
                         <img src='https://i.imgur.com/i6wM5sO.png' title="source: imgur.com" alt="Jornadas" width="100%" height="300px"/>
