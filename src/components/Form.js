@@ -44,7 +44,7 @@ export const Form = () => {
 
 	return (
 		<>
-			<Box sx={{ p: 2, marginBottom: '100px' }}>
+			<Box sx={{ p: 2, marginBottom: '80px' }}>
 				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara- Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
 				{/* <Divider sx={{}}/> */}
 				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 14 }}>
@@ -210,7 +210,7 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
+					<Grid item sm={12} xs={12} sx={{ mt: 3 }}>
 						<Button variant='contained' onClick={handleSubmit}>
 							Enviar
 						</Button>
