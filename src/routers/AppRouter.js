@@ -17,7 +17,7 @@ export const AppRouter = () => {
                         component={ CmpRouter }
                     />
 
-                    <Redirect to="/"/>
+                    <Redirect to="/form"/>
                 </Switch>
             </div>
         </Router>
