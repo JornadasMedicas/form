@@ -5,6 +5,7 @@ import swal from 'sweetalert2';
 import { initValuesFormJordana, initValuesFormJordanaErrors } from './initValues/initValuesFormJornada'
 import { validarFormatoCrearRegistro } from '../helpers/validarFormatos'
 import ReCAPTCHA from "react-google-recaptcha";
+import { saveRegistro } from '../services/registrosHelpers';
 
 
 const modulos = [
@@ -26,7 +27,7 @@ export const Form = () => {
 			icon: 'warning',
 			confirmButtonColor: '#fbb373',
 			confirmButtonText: 'Entendido'
-		  })
+		})
 		setVisible('inline-block');
 	}
 
@@ -34,19 +35,26 @@ export const Form = () => {
 		setVisible('none');
 	}
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		setErrors(initValuesFormJordanaErrors);
 		const { isOK, errors } = validarFormatoCrearRegistro(values);
 		if (isOK) {
-			console.log(values);
-			swal.fire({
-				icon: 'success',
-				title: 'Su registro se ha realizado correctamente',
-				html: 'Su pase de entrada (código QR) se enviará a su correo electrónico antes del evento. <hr><b>No olvide llevarlo consigo pues será su registro de asistencia.<b>',
-				showConfirmButton: true
-			  })
-
-			  reset();
+			let response = await saveRegistro( values );
+			if( response ) {
+				swal.fire({
+					icon: 'success',
+					title: 'Su registro se ha realizado correctamente',
+					html: 'Su pase de entrada (código QR) se enviará a su correo electrónico antes del evento. <hr><b>No olvide llevarlo consigo pues será su registro de asistencia.<b>',
+					showConfirmButton: true
+				})
+				reset();
+			} else {
+				swal.fire({
+					icon: 'error',
+					title: 'Error desconocido',
+					text: 'Error desconocido',
+				});
+			}		
 		} else {
 			setErrors(errors);
 			swal.fire({
@@ -68,7 +76,7 @@ export const Form = () => {
 
 	return (
 		<>
-			<Box sx={{ p: 2, marginBottom: '80px'}}>
+			<Box sx={{ p: 2, marginBottom: '80px' }}>
 				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara- Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
 				{/* <Divider sx={{}}/> */}
 				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 14 }}>
@@ -101,7 +109,7 @@ export const Form = () => {
 							label='Matrícula ( Solo para personal CAE )'
 							fullWidth
 							autoComplete='off'
-							value={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? values.matricula='' : values.matricula}
+							value={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? values.matricula = '' : values.matricula}
 							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'matricula')}
 							error={errors.matricula?.error}
 							helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
@@ -235,23 +243,23 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 3}}>
+					<Grid item sm={12} xs={12} sx={{ mt: 3 }}>
 						<ReCAPTCHA
 							sitekey={process.env.REACT_APP_SITE_KEY}
 							size='normal'
 							theme='light'
-							style={{width: '305px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px'}}
+							style={{ width: '305px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px' }}
 							onChange={enableButton}
 							onExpired={disableButton}
 						/>
-						<Button className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{display: visible, backgroundColor: "#ca7757", ":hover": {backgroundColor: '#b7402a'}}}>
+						<Button className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
 							Enviar
 						</Button>
 					</Grid>
 
 				</FormControl>
 
-				<Typography sx={{mt: 3, textAlign: 'left', textDecoration: 'underline'}}>
+				<Typography sx={{ mt: 3, textAlign: 'left', textDecoration: 'underline' }}>
 					¿Desea más Información?
 					Ponerse en contacto con la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>

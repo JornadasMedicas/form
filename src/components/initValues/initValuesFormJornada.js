@@ -10,6 +10,11 @@ export const initValuesFormJordana = {
     modulo: '',
     ciudad: '',
     escuela: '',
+    isQrSend: false,
+    isConstanciaSend: false,
+    isAssistDay1: false,
+    isAssistDay2: false,
+    isAssistDay3: false,
 }
 
 export const initValuesFormJordanaErrors = {
