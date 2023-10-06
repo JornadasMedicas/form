@@ -4,9 +4,9 @@ import swal from 'sweetalert2';
 export const saveRegistro = async (values) => {
     try {
         const userInfo = await db.collection(`${values.email}/registroJornada/info`).get();
-        if (!userInfo.size == 1) {
+        if (!userInfo.size === 1) {
             //* NO SE HA REGISTRADO
-            const doc = await db.collection(`${values.email}/registroJornada/info`).add(values);
+            await db.collection(`${values.email}/registroJornada/info`).add(values);
             return true;
         } else {
             //! YA SE REGISTRO

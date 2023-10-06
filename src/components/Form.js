@@ -1,5 +1,5 @@
 import { Autocomplete, Box, Button, FormControl, Grid, InputLabel, ListItemText, MenuItem, Select, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import useForm2 from '../hooks/useForm2'
 import swal from 'sweetalert2';
 import { initValuesFormJordana, initValuesFormJordanaErrors } from './initValues/initValuesFormJornada'
@@ -19,16 +19,37 @@ export const Form = () => {
 	const { values, handleInputChange, reset } = useForm2(initValuesFormJordana);
 	const [errors, setErrors] = useState(initValuesFormJordanaErrors);
 	const [visible, setVisible] = useState('none');
+	const captcha = useRef(null);
 
 	const enableButton = () => {
 		swal.fire({
 			title: 'IMPORTANTE',
-			html: 'Verifique muy bien sus datos antes de enviar el formulario. Su constancia de participación será enviada a su correo electrónico con los datos proporcionados al finalizar el evento. <hr><b>¡El Centro de Alta Especialidad Dr. Rafael Lucio no se hace responsable por datos mal proporcionados!<b>',
+			html: 'Verifique muy bien sus datos antes de enviar el formulario. Su constancia de participación será enviada a su correo electrónico con los datos proporcionados al finalizar el evento.<br><hr>' + 
+			'<b>Categoría:</b> ' + values.categoria + '<br>' +
+			'<b>Matrícula:</b> ' + values.matricula + '<br>' +
+			'<b>Acrónimo:</b> ' + values.acronimo + '<br>' +
+			'<b>Nombre:</b> ' + values.nombre + ' ' + values.apellido + '<br>' +
+			'<b>RFC:</b> '+ values.rfc + '<br>' +
+			'<b>Correo Electrónico:</b> ' + values.email + '<br>' +
+			'<b>Teléfono:</b> ' + values.tel + '<br>' +
+			'<b>Módulo:</b> ' + values.modulo + '<br>' +
+			'<b>Ciudad:</b> ' + values.ciudad + '<br>' +
+			'<b>Institución:</b> ' + values.escuela + '<br>' +
+			'<hr><b>¡El Centro de Alta Especialidad Dr. Rafael Lucio no se hace responsable por datos mal proporcionados!</b>',
 			icon: 'warning',
 			confirmButtonColor: '#fbb373',
-			confirmButtonText: 'Entendido'
-		})
-		setVisible('inline-block');
+			confirmButtonText: 'Entendido',
+			showCancelButton: true,
+			cancelButtonColor: '#d33',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setVisible('inline-block');
+			} else {
+				captcha.current.reset();
+			}
+		  })
+		/* setVisible('inline-block'); */
 	}
 
 	const disableButton = () => {
@@ -75,7 +96,7 @@ export const Form = () => {
 				{/* <Divider sx={{}}/> */}
 				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 14 }}>
 					<b>Los datos registrados se usarán para la realización y envío de su constancia digital.</b> {' '}
-					Su constancia será enviada al finalizar el evento al correo electrónico proporcionado, favor de revisar la bandeja de spam, si presenta alguna inconsistencia reportarlo al Centro de Alta Especialidad Dr. Rafael Lucio 228- 8144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
+					Su constancia será enviada al finalizar el evento al correo electrónico proporcionado, favor de revisar la bandeja de spam, si presenta alguna inconsistencia reportarlo al Centro de Alta Especialidad Dr. Rafael Lucio 228 - 8144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
 				<hr />
 				<FormControl fullWidth sx={{ mt: 2 }}>
@@ -239,6 +260,7 @@ export const Form = () => {
 
 					<Grid item sm={12} xs={12} sx={{ mt: 3 }}>
 						<ReCAPTCHA
+							ref={captcha}
 							sitekey={process.env.REACT_APP_SITE_KEY}
 							size='normal'
 							theme='light'
@@ -246,6 +268,10 @@ export const Form = () => {
 							onChange={enableButton}
 							onExpired={disableButton}
 						/>
+						<Typography className='animate__animated animate__fadeInUp' sx={{display: visible}}>Al enviar el formulario, usted acepta estar de acuerdo con el <b><a href="https://www.ssaver.gob.mx/transparencia/wp-content/uploads/sites/7/2022/06/Aviso-de-privacidad-simplificado-e-integral-Capacitacion.pdf" target='blank'>aviso de privacidad de capacitación.</a></b></Typography>
+					</Grid>
+
+					<Grid item sm={12} xs={12} sx={{ mt: 1 }}>
 						<Button className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
 							Enviar
 						</Button>

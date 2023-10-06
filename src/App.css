@@ -44,7 +44,7 @@ button {
   right: 0;
 }
 
-@media only screen and (max-width: 950px) {
+@media only screen and (max-width: 1080px) {
   .card {
     width: 100%;
   }
