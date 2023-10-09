@@ -27,3 +27,22 @@ export const saveRegistro = async (values) => {
         return false;
     }
 }
+
+export const fetchRegistro = async(values) => {
+    try {
+        const userInfo = await db.collection(`${values}/registroJornada/info`).get();
+        const arr = [];
+        
+        userInfo.forEach(doc => {
+            arr.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        return arr;
+
+    } catch (error) {
+        console.log(error);
+    }
+}

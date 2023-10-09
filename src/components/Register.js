@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { TableGrid } from './TableGrid'
 import { Box, Grid, InputAdornment, TextField } from '@mui/material'
+import { fetchRegistro } from '../services/registrosHelpers';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 export const Register = () => {
@@ -14,26 +15,33 @@ export const Register = () => {
 
     const { data } = formValues;
 
+    /* const fetchInvitado = async (email) => {
+        const info = await fetchRegistro(email);
+
+        setInvitados([info]);
+    }
+
     useEffect(() => {
         setTimeout(() => {
-            let shot = data.toUpperCase().split(',')
+            let shot = data.toUpperCase().split(',');
+
             if (shot.length != 1) {
                 shot.length > 5 
                 ? 
-                console.log('ERROR')     
-                : 
-                setInvitados([...invitados, shot])
+                console.log('ERROR')  
+                :
+                fetchInvitado(shot[1])
             } 
 
             reset();
         }, 500)
 
-    }, [data])
+    }, [data]) */
 
     return (
         <>
             <Grid item sm={12} xs={12} sx={{ mt: 2 }}>
-                {/* MIHO001029IX8,rojeru.san1983@gmail.com,Estomatología,2281914008,7004 */}
+                {/* MIHO001029IX8,OSCAR@HOT.COM,Estomatología,2281914008,7004 */}
                 <TextField
                     label='Escanear QR'
                     autoComplete='off'
@@ -66,7 +74,7 @@ export const Register = () => {
             </Grid>
 
             <Box sx={{ p: 2, mt: 2, marginBottom: '70px' }}>
-                <TableGrid value={invitados}/>
+                {/* <TableGrid value={invitados}/> */}
             </Box>
         </>
     )

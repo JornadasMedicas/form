@@ -16,11 +16,13 @@ export const TableGrid = (invitados) => {
 
     let rows = [];
 
-    if (invitados.value.length > 0) {
+    console.log(invitados);
+
+    /* if (invitados.value.length > 0) {
         rows = [
             { id: '1', email: invitados.value[0][1], rfc: invitados.value[0][0], modulo: invitados.value[0][2], tel: invitados.value[0][3], matricula: invitados.value[0][4]}
         ];
-    }
+    } */
 
     
     return (

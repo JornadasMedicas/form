@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, FormControl, Grid, InputLabel, ListItemText, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, FormControl, FormControlLabel, Grid, InputLabel, ListItemText, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useRef, useState } from 'react'
 import useForm2 from '../hooks/useForm2'
 import swal from 'sweetalert2';
@@ -6,6 +6,8 @@ import { initValuesFormJordana, initValuesFormJordanaErrors } from './initValues
 import { validarFormatoCrearRegistro } from '../helpers/validarFormatos'
 import ReCAPTCHA from "react-google-recaptcha";
 import { saveRegistro } from '../services/registrosHelpers';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 
 
 const modulos = [
@@ -19,6 +21,7 @@ export const Form = () => {
 	const { values, handleInputChange, reset } = useForm2(initValuesFormJordana);
 	const [errors, setErrors] = useState(initValuesFormJordanaErrors);
 	const [visible, setVisible] = useState('none');
+	const [disabled, setDisabled] = useState(false);
 	const captcha = useRef(null);
 
 	const enableButton = () => {
@@ -49,7 +52,6 @@ export const Form = () => {
 				captcha.current.reset();
 			}
 		  })
-		/* setVisible('inline-block'); */
 	}
 
 	const disableButton = () => {
@@ -60,6 +62,7 @@ export const Form = () => {
 		setErrors(initValuesFormJordanaErrors);
 		const { isOK, errors } = validarFormatoCrearRegistro(values);
 		if (isOK) {
+			console.log(values);
 			let response = await saveRegistro( values );
 			if( response ) {
 				swal.fire({
@@ -89,12 +92,16 @@ export const Form = () => {
 		}
 	}
 
+	const manageDisabled = () => {
+		disabled == false ? setDisabled(true) : setDisabled(false)
+	}
+
 	return (
 		<>
 			<Box sx={{ p: 2, marginBottom: '80px' }}>
 				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara- Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
 				{/* <Divider sx={{}}/> */}
-				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 14 }}>
+				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 15 }}>
 					<b>Los datos registrados se usarán para la realización y envío de su constancia digital.</b> {' '}
 					Su constancia será enviada al finalizar el evento al correo electrónico proporcionado, favor de revisar la bandeja de spam, si presenta alguna inconsistencia reportarlo al Centro de Alta Especialidad Dr. Rafael Lucio 228 - 8144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
@@ -258,7 +265,7 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 3 }}>
+					<Grid item sm={12} xs={12} sx={{ mt: 4 }}>
 						<ReCAPTCHA
 							ref={captcha}
 							sitekey={process.env.REACT_APP_SITE_KEY}
@@ -268,11 +275,16 @@ export const Form = () => {
 							onChange={enableButton}
 							onExpired={disableButton}
 						/>
-						<Typography className='animate__animated animate__fadeInUp' sx={{display: visible}}>Al enviar el formulario, usted acepta estar de acuerdo con el <b><a href="https://www.ssaver.gob.mx/transparencia/wp-content/uploads/sites/7/2022/06/Aviso-de-privacidad-simplificado-e-integral-Capacitacion.pdf" target='blank'>aviso de privacidad de capacitación.</a></b></Typography>
+
+						<Grid sx={{display: visible}} className='animate__animated animate__fadeInUp'>
+							<Checkbox defaultChecked onChange={manageDisabled}/>Acepto que mis datos personales sean tratados de acuerdo con el <Link href="https://www.ssaver.gob.mx/transparencia/wp-content/uploads/sites/7/2022/06/Aviso-de-privacidad-simplificado-e-integral-Capacitacion.pdf" target="_blank">
+								<b>aviso de privacidad de capacitación.</b>
+							</Link>
+						</Grid>
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 1 }}>
-						<Button className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
+						<Button disabled={disabled} className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
 							Enviar
 						</Button>
 					</Grid>

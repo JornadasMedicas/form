@@ -19,10 +19,14 @@ function validateEmail( email ){
 export const validarFormatoCrearRegistro = ( values ) => {
     let errors = initValuesFormJordanaErrors;
 
+    if ((values.categoria === 'Trabajador CAE' || values.categoria === 'Médico Residente') && values.matricula == '') {
+        errors = { ...errors, 'matricula': { ...errors.matricula, error: true } }
+    }
+
     if( values.matricula.length > 0) {
         if( values.matricula.length !== 4 ) {
             errors = { ...errors, 'matricula': { ...errors.matricula, error: true, msg: "La matrícula no es válida"} }
-        } else if( isNaN(values.matricula) ) {
+        } else if ( isNaN(values.matricula) ) {
             errors = { ...errors, 'matricula': { ...errors.matricula, error: true, msg: "La matrícula no es válida"} }
         }
     }
