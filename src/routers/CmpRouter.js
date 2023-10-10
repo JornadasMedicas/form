@@ -3,6 +3,11 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 /* import { GenerateQR } from '../components/GenerateQR' */
 import { Register } from '../components/Register';
 import { Form } from '../components/Form';
+import { HomePage } from "../components/HomePage";
+import { Medicine } from '../components/Medicine';
+import { Nursing } from '../components/Nursing';
+import { Stomatology } from '../components/Stomatology';
+import { Chemicals } from '../components/Chemicals';
 
 export const CmpRouter = () => {
   return (
@@ -10,7 +15,7 @@ export const CmpRouter = () => {
         <div className='container-fluid text-center'>
             <div className='row'>
                 <div className='col-sm-12 pt-3 card animate__animated animate__fadeIn'>
-                    <h1 className='fonts'><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
+                    <h1><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
                     <div className='jornadas' style={{padding: 0, margin: 0}}>
                         <img src='https://i.imgur.com/i6wM5sO.png' title="source: imgur.com" alt="Jornadas" width="100%" height="300px"/>
                     </div>
@@ -34,7 +39,37 @@ export const CmpRouter = () => {
                                 component={ Form }
                             />
 
-                            <Redirect to="/form"/>
+                            <Route
+                                exact
+                                path="/home"
+                                component={ HomePage }
+                            />
+
+                            <Route
+                                exact
+                                path="/medicine"
+                                component={ Medicine }
+                            />
+
+                            <Route
+                                exact
+                                path="/nursing"
+                                component={ Nursing }
+                            />
+
+                            <Route
+                                exact
+                                path="/stomatology"
+                                component={ Stomatology }
+                            />
+
+                            <Route
+                                exact
+                                path="/chemicals"
+                                component={ Chemicals }
+                            />
+
+                            <Redirect to="/home"/>
                         </Switch>
                     </div>
                     <div className='footer'>

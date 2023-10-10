@@ -8,6 +8,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { saveRegistro } from '../services/registrosHelpers';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import { Return } from './Return';
 
 
 const modulos = [
@@ -98,8 +99,8 @@ export const Form = () => {
 
 	return (
 		<>
-			<Box sx={{ p: 2, marginBottom: '80px' }}>
-				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara- Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
+			<Box className='animate__animated animate__fadeIn' sx={{ p: 2, marginBottom: '80px' }}>
+				<Typography sx={{ textAlign: 'left', mb: 3, fontWeight: 'bold' }}> Dirección del evento: Hotel Gamma Xalapa Nubara - Av. Ruiz Cortines núm. 912, Unidad del Bosque, 91010 Xalapa, Ver. México</Typography>
 				{/* <Divider sx={{}}/> */}
 				<Typography sx={{ textAlign: 'left !important', mb: 3, fontSize: 15 }}>
 					<b>Los datos registrados se usarán para la realización y envío de su constancia digital.</b> {' '}
@@ -295,6 +296,7 @@ export const Form = () => {
 					¿Desea más Información?
 					Ponerse en contacto con la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
+				<Return/>
 			</Box>
 		</>
 	)

@@ -12,12 +12,12 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route 
+                    <Route
                         path="/"
                         component={ CmpRouter }
                     />
 
-                    <Redirect to="/form"/>
+                    <Redirect to="/home"/>
                 </Switch>
             </div>
         </Router>
