@@ -9,14 +9,8 @@ import { saveRegistro } from '../services/registrosHelpers';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import { Return } from './Return';
-
-
-const modulos = [
-	'Medicina',
-	'Enfermería',
-	'Químicos',
-	'Estomatología'
-]
+import { modulos,  categorias, matriculados } from './initValues/catalogs';
+import { StomaWorkshop } from './StomaWorkshop';
 
 export const Form = () => {
 	const { values, handleInputChange, reset } = useForm2(initValuesFormJordana);
@@ -97,6 +91,10 @@ export const Form = () => {
 		disabled == false ? setDisabled(true) : setDisabled(false)
 	}
 
+	/* const assistWorkshop = (taller) => {
+		values.
+	}
+ */
 	return (
 		<>
 			<Box className='animate__animated animate__fadeIn' sx={{ p: 2, marginBottom: '80px' }}>
@@ -119,10 +117,9 @@ export const Form = () => {
 							value={values.categoria}
 							onChange={(e) => handleInputChange(e.target.value, 'categoria')}
 						>
-							<MenuItem value={'Estudiante'}>Estudiante</MenuItem>
-							<MenuItem value={'Profesionista'}>Profesionista</MenuItem>
-							<MenuItem value={'Trabajador CAE'}>Trabajador CAE</MenuItem>
-							<MenuItem value={'Médico Residente'}>Médico Residente</MenuItem>
+							{categorias.map((cat, index) =>
+								<MenuItem key={index} value={cat}>{cat}</MenuItem>
+          					)}
 
 						</Select>
 					</Grid>
@@ -132,12 +129,12 @@ export const Form = () => {
 							label='Matrícula ( Solo para personal CAE )'
 							fullWidth
 							autoComplete='off'
-							value={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? values.matricula = '' : values.matricula}
+							value={!matriculados.includes(values.categoria) ? values.matricula = '' : values.matricula}
 							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'matricula')}
 							error={errors.matricula?.error}
 							helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
 							inputProps={{ maxLength: 4 }}
-							disabled={values.categoria === 'Estudiante' || values.categoria === 'Profesionista' ? true : false}
+							disabled={!matriculados.includes(values.categoria) ? true : false}
 						/>
 					</Grid>
 
@@ -216,6 +213,30 @@ export const Form = () => {
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
+						<TextField
+							label='Ciudad de Procedencia'
+							fullWidth
+							autoComplete='off'
+							value={values.ciudad}
+							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'ciudad')}
+							error={errors.ciudad?.error}
+							helperText={errors.ciudad?.error ? errors.ciudad?.msg : ''}
+						/>
+					</Grid>
+
+					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
+						<TextField
+							label='Escuela, Institución o Dependencia'
+							fullWidth
+							autoComplete='off'
+							value={values.escuela}
+							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'escuela')}
+							error={errors.escuela?.error}
+							helperText={errors.escuela?.error ? errors.escuela?.msg : ''}
+						/>
+					</Grid>
+
+					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
 						<Autocomplete
 							id='select-grupo'
 							options={modulos}
@@ -242,28 +263,16 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
-						<TextField
-							label='Ciudad de Procedencia'
-							fullWidth
-							autoComplete='off'
-							value={values.ciudad}
-							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'ciudad')}
-							error={errors.ciudad?.error}
-							helperText={errors.ciudad?.error ? errors.ciudad?.msg : ''}
-						/>
-					</Grid>
-
-					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
-						<TextField
-							label='Escuela, Institución o Dependencia'
-							fullWidth
-							autoComplete='off'
-							value={values.escuela}
-							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'escuela')}
-							error={errors.escuela?.error}
-							helperText={errors.escuela?.error ? errors.escuela?.msg : ''}
-						/>
+					<Grid container rowSpacing={0} columns={2} item sx={{ mt: 2}}>
+						<Grid item xs={1} sx={{textAlign: 'left', paddingLeft: 5}}>
+							<Typography>Talleres Generales</Typography>
+							<Checkbox /* onChange={manageDisabled} *//> 23 de Noviembre - Estructura de intervención en los cuidados paliativos, un enfoque multidisciplinario e intersectorial
+						</Grid>
+						<Grid item className='animate__animated animate__fadeInUp' xs={1} sx={{display: values.modulo === 'Estomatología' ? 'visible' : 'none', textAlign: 'left', paddingLeft: 5}}>
+							{values.modulo === 'Estomatología' 
+							&& 
+							<StomaWorkshop/>}
+						</Grid>
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 4 }}>
@@ -285,7 +294,7 @@ export const Form = () => {
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 1 }}>
-						<Button disabled={disabled} className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
+						<Button disabled={disabled} className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: 'visible', backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
 							Enviar
 						</Button>
 					</Grid>

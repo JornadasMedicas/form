@@ -1,4 +1,4 @@
-import { db } from '../firebase/firebase-config';
+import { db, dbc } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
 
 export const saveRegistro = async (values) => {
@@ -40,12 +40,14 @@ export const fetchRegistro = async (values) => {
 
                 db.collection(`${values}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
 
-                arr.push({
+                /* arr.push({
                     id: doc.id,
                     day: day,
                     ...doc.data()
-                });
+                }); */
             });
+
+            
 
             swal.fire({
                 position: 'top-end',

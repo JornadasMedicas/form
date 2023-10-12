@@ -1,5 +1,5 @@
 export const initValuesFormJordana = {
-    categoria: 'Trabajador CAE',
+    categoria: 'Estudiante (Anahuac)',
     matricula: '',
     acronimo: '',
     nombre: '',
@@ -15,6 +15,9 @@ export const initValuesFormJordana = {
     isAssistDay1: false,
     isAssistDay2: false,
     isAssistDay3: false,
+    isMedWorkshop: false,
+    isStomaWorkshop1: false,
+    isStomaWorkshop2: false
 }
 
 export const initValuesFormJordanaErrors = {
@@ -61,5 +64,5 @@ export const initValuesFormJordanaErrors = {
     escuela: {
         error: false,
         msg: 'Este campo es necesario'
-    },
+    }
 }

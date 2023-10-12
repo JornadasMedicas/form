@@ -67,10 +67,6 @@ export const validarFormatoCrearRegistro = ( values ) => {
         errors = { ...errors, 'ciudad': { ...errors.ciudad, error: true } }
     }
 
-    if( values.escuela === '') {
-        errors = { ...errors, 'escuela': { ...errors.escuela, error: true } }
-    }
-
     let isOK = true;
     for( const [ key, value ] of Object.entries( errors ) ) {
         if( value.error ) {
