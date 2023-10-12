@@ -55,6 +55,7 @@ button {
   }
 
   .jornadas {
-    display: none;
+    display: inline-block;
+    zoom: 50%;
   }
 }

@@ -18,7 +18,7 @@ export const saveRegistro = async (values) => {
             });
             return false;
         }
-    } catch( err ) {
+    } catch (err) {
         swal.fire({
             icon: 'error',
             title: 'Error desconocido',
@@ -28,19 +28,43 @@ export const saveRegistro = async (values) => {
     }
 }
 
-export const fetchRegistro = async(values) => {
+export const fetchRegistro = async (values) => {
     try {
         const userInfo = await db.collection(`${values}/registroJornada/info`).get();
-        const arr = [];
-        
-        userInfo.forEach(doc => {
-            arr.push({
-                id: doc.id,
-                ...doc.data()
-            });
-        });
+        const day = 1;
+        if (userInfo.size == 1) {
+            console.log("actualizar estado");
+            const arr = [];
 
-        return arr;
+            userInfo.forEach(doc => {
+
+                db.collection(`${values}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
+
+                arr.push({
+                    id: doc.id,
+                    day: day,
+                    ...doc.data()
+                });
+            });
+
+            swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Asistencia confirmada',
+                showConfirmButton: false,
+                timer: 1000
+            })
+
+            return arr;
+
+        } else {
+            swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El usuario no fue encontrado',
+            });
+            return [];
+        }
 
     } catch (error) {
         console.log(error);

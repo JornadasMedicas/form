@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
@@ -16,7 +16,19 @@ export const TableGrid = (invitados) => {
 
     let rows = [];
 
-    console.log(invitados);
+    const stored = JSON.parse(localStorage.getItem('customers')) || [];
+
+    const [person, setPerson] = useState(stored);
+
+    useEffect(() => {
+        setPerson(invitados.value);
+        localStorage.setItem('customers', JSON.stringify(person));
+    }, [invitados])
+    
+
+    /* useEffect(() => {
+        console.log(invitados);
+    }, [invitados]) */
 
     /* if (invitados.value.length > 0) {
         rows = [
