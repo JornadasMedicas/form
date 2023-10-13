@@ -9,8 +9,7 @@ import { saveRegistro } from '../services/registrosHelpers';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import { Return } from './Return';
-import { modulos,  categorias, matriculados } from './initValues/catalogs';
-import { StomaWorkshop } from './StomaWorkshop';
+import { modulos, categorias, matriculados } from './initValues/catalogs';
 
 export const Form = () => {
 	const { values, handleInputChange, reset } = useForm2(initValuesFormJordana);
@@ -18,22 +17,23 @@ export const Form = () => {
 	const [visible, setVisible] = useState('none');
 	const [disabled, setDisabled] = useState(false);
 	const captcha = useRef(null);
+	const [checkValue, setCheckValue] = useState(false);
 
 	const enableButton = () => {
 		swal.fire({
 			title: 'IMPORTANTE',
-			html: 'Verifique muy bien sus datos antes de enviar el formulario. Su constancia de participación será enviada a su correo electrónico con los datos proporcionados al finalizar el evento.<br><hr>' + 
-			'<b>Categoría:</b> ' + values.categoria + '<br>' +
-			'<b>Matrícula:</b> ' + values.matricula + '<br>' +
-			'<b>Acrónimo:</b> ' + values.acronimo + '<br>' +
-			'<b>Nombre:</b> ' + values.nombre + ' ' + values.apellido + '<br>' +
-			'<b>RFC:</b> '+ values.rfc + '<br>' +
-			'<b>Correo Electrónico:</b> ' + values.email + '<br>' +
-			'<b>Teléfono:</b> ' + values.tel + '<br>' +
-			'<b>Módulo:</b> ' + values.modulo + '<br>' +
-			'<b>Ciudad:</b> ' + values.ciudad + '<br>' +
-			'<b>Institución:</b> ' + values.escuela + '<br>' +
-			'<hr><b>¡El Centro de Alta Especialidad Dr. Rafael Lucio no se hace responsable por datos mal proporcionados!</b>',
+			html: 'Verifique muy bien sus datos antes de enviar el formulario. Su constancia de participación será enviada a su correo electrónico con los datos proporcionados al finalizar el evento.<br><hr>' +
+				'<b>Categoría:</b> ' + values.categoria + '<br>' +
+				'<b>Matrícula:</b> ' + values.matricula + '<br>' +
+				'<b>Acrónimo:</b> ' + values.acronimo + '<br>' +
+				'<b>Nombre:</b> ' + values.nombre + ' ' + values.apellido + '<br>' +
+				'<b>RFC:</b> ' + values.rfc + '<br>' +
+				'<b>Correo Electrónico:</b> ' + values.email + '<br>' +
+				'<b>Teléfono:</b> ' + values.tel + '<br>' +
+				'<b>Módulo:</b> ' + values.modulo + '<br>' +
+				'<b>Ciudad:</b> ' + values.ciudad + '<br>' +
+				'<b>Institución:</b> ' + values.escuela + '<br>' +
+				'<hr><b>¡El Centro de Alta Especialidad Dr. Rafael Lucio no se hace responsable por datos mal proporcionados!</b>',
 			icon: 'warning',
 			confirmButtonColor: '#fbb373',
 			confirmButtonText: 'Entendido',
@@ -46,38 +46,13 @@ export const Form = () => {
 			} else {
 				captcha.current.reset();
 			}
-		  })
+		})
 	}
 
 	const disableButton = () => {
 		setVisible('none');
 	}
 
-	const handleSubmit = async () => {
-		setErrors(initValuesFormJordanaErrors);
-		const { isOK, errors } = validarFormatoCrearRegistro(values);
-		if (isOK) {
-			console.log(values);
-			let response = await saveRegistro( values );
-			if( response ) {
-				swal.fire({
-					icon: 'success',
-					title: 'Su registro se ha realizado correctamente',
-					html: 'Su pase de entrada (código QR) se enviará a su correo electrónico antes del evento. <hr><b>No olvide llevarlo consigo pues será su registro de asistencia.<b>',
-					showConfirmButton: true
-				})
-				reset();
-			}	
-		} else {
-			setErrors(errors);
-			swal.fire({
-				icon: 'error',
-				title: 'Error al guardar formulario',
-				text: 'Verifica los campos e intenta de nuevo',
-				/* footer: '<a href="">Why do I have this issue?</a>' */
-			});
-		}
-	}
 	const handleInputChangeGrupo = (e, newValue) => {
 		if (newValue) {
 			handleInputChange(newValue, 'modulo');
@@ -91,10 +66,57 @@ export const Form = () => {
 		disabled == false ? setDisabled(true) : setDisabled(false)
 	}
 
-	/* const assistWorkshop = (taller) => {
-		values.
+	const assistWorkshop = (taller, e) => {
+		if (taller == 1) {
+			setCheckValue(!checkValue);
+		}
+		console.log(taller, e.target.value);
+		switch (taller) {
+			case 1:
+				values.isMedWorkshop === false ? values.isMedWorkshop = true : values.isMedWorkshop = false
+				break;
+
+			case 2:
+				values.isStomaWorkshop1 === false ? values.isStomaWorkshop1 = true : values.isStomaWorkshop1 = false
+				break;
+
+			case 3:
+				values.isStomaWorkshop2 === false ? values.isStomaWorkshop2 = true : values.isStomaWorkshop2 = false
+				break;
+		}
+
+		// console.log(values.isMedWorkshop, values.isStomaWorkshop1, values.isStomaWorkshop2);
 	}
- */
+
+	console.log(checkValue);
+
+	const handleSubmit = async () => {
+		setErrors(initValuesFormJordanaErrors);
+		const { isOK, errors } = validarFormatoCrearRegistro(values);
+		if (isOK) {
+			console.log(values);
+			let response = await saveRegistro(values);
+			if (response) {
+				swal.fire({
+					icon: 'success',
+					title: 'Su registro se ha realizado correctamente',
+					html: 'Su pase de entrada (código QR) se enviará a su correo electrónico antes del evento. <hr><b>No olvide llevarlo consigo pues será su registro de asistencia.<b>',
+					showConfirmButton: true
+				})
+				reset();
+				setCheckValue(false);
+			}
+		} else {
+			setErrors(errors);
+			swal.fire({
+				icon: 'error',
+				title: 'Error al guardar formulario',
+				text: 'Verifica los campos e intenta de nuevo',
+				/* footer: '<a href="">Why do I have this issue?</a>' */
+			});
+		}
+	}
+
 	return (
 		<>
 			<Box className='animate__animated animate__fadeIn' sx={{ p: 2, marginBottom: '80px' }}>
@@ -119,7 +141,7 @@ export const Form = () => {
 						>
 							{categorias.map((cat, index) =>
 								<MenuItem key={index} value={cat}>{cat}</MenuItem>
-          					)}
+							)}
 
 						</Select>
 					</Grid>
@@ -155,7 +177,7 @@ export const Form = () => {
 							label='Nombre (s)'
 							fullWidth
 							autoComplete='off'
-							value={values.nombre}
+							value={values.nombre} condition
 							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'nombre')}
 							error={errors.nombre?.error}
 							helperText={errors.nombre?.error ? errors.nombre?.msg : ''}
@@ -216,7 +238,7 @@ export const Form = () => {
 						<TextField
 							label='Ciudad de Procedencia'
 							fullWidth
-							autoComplete='off'
+							autoComplete='off' condition
 							value={values.ciudad}
 							onChange={(e) => handleInputChange(e.target.value.toUpperCase(), 'ciudad')}
 							error={errors.ciudad?.error}
@@ -263,19 +285,25 @@ export const Form = () => {
 						/>
 					</Grid>
 
-					<Grid container rowSpacing={0} columns={2} item sx={{ mt: 2}}>
-						<Grid item xs={1} sx={{textAlign: 'left', paddingLeft: 5}}>
-							<Typography>Talleres Generales</Typography>
-							<Checkbox /* onChange={manageDisabled} *//> 23 de Noviembre - Estructura de intervención en los cuidados paliativos, un enfoque multidisciplinario e intersectorial
+					<Grid container rowSpacing={0} columns={2} item sx={{ mt: 2 }}>
+						<Grid item xs={2} sx={{ textAlign: 'left', paddingLeft: 5 }}>
+							<Typography>Talleres Medicina</Typography>
+							<Checkbox checked={checkValue} onChange={(e) => assistWorkshop(1, e)} /> 23 de Noviembre - Estructura de intervención en los cuidados paliativos, un enfoque multidisciplinario e intersectorial
 						</Grid>
-						<Grid item className='animate__animated animate__fadeInUp' xs={1} sx={{display: values.modulo === 'Estomatología' ? 'visible' : 'none', textAlign: 'left', paddingLeft: 5}}>
-							{values.modulo === 'Estomatología' 
-							&& 
-							<StomaWorkshop/>}
+						<Grid item className='animate__animated animate__fadeInUp' xs={2} sx={{ display: values.modulo === 'Estomatología' ? 'visible' : 'none', textAlign: 'left', paddingLeft: 5, mt: 3 }}>
+							{values.modulo === 'Estomatología'
+								&&
+								<>
+									<Typography>Talleres Estomatología</Typography>
+									<Checkbox onChange={(e) => assistWorkshop(2, e)} />23 de Noviembre - Complicaciones y errores en el tratamiento de restauración interproximales <br />
+									<Checkbox onChange={(e) => assistWorkshop(3, e)} />24 de Noviembre - Utilización de distintas técnicas quirúrgicas en pacientes de labio y paladar hendido
+								</>}
 						</Grid>
 					</Grid>
 
-					<Grid item sm={12} xs={12} sx={{ mt: 4 }}>
+					<hr />
+
+					<Grid item sm={12} xs={12} sx={{ mt: 2 }}>
 						<ReCAPTCHA
 							ref={captcha}
 							sitekey={process.env.REACT_APP_SITE_KEY}
@@ -286,15 +314,15 @@ export const Form = () => {
 							onExpired={disableButton}
 						/>
 
-						<Grid sx={{display: visible}} className='animate__animated animate__fadeInUp'>
-							<Checkbox defaultChecked onChange={manageDisabled}/>Acepto que mis datos personales sean tratados de acuerdo con el <Link href="https://www.ssaver.gob.mx/transparencia/wp-content/uploads/sites/7/2022/06/Aviso-de-privacidad-simplificado-e-integral-Capacitacion.pdf" target="_blank">
+						<Grid sx={{ display: visible }} className='animate__animated animate__fadeInUp'>
+							<Checkbox defaultChecked onChange={manageDisabled} />Acepto que mis datos personales sean tratados de acuerdo con el <Link href="https://www.ssaver.gob.mx/transparencia/wp-content/uploads/sites/7/2022/06/Aviso-de-privacidad-simplificado-e-integral-Capacitacion.pdf" target="_blank">
 								<b>aviso de privacidad de capacitación.</b>
 							</Link>
 						</Grid>
 					</Grid>
 
 					<Grid item sm={12} xs={12} sx={{ mt: 1 }}>
-						<Button disabled={disabled} className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: 'visible', backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
+						<Button disabled={disabled} className='animate__animated animate__fadeInUp' variant='contained' onClick={handleSubmit} sx={{ display: visible, backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' } }}>
 							Enviar
 						</Button>
 					</Grid>
@@ -305,7 +333,7 @@ export const Form = () => {
 					¿Desea más Información?
 					Ponerse en contacto con la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
-				<Return/>
+				<Return />
 			</Box>
 		</>
 	)
