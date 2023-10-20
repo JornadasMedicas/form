@@ -8,6 +8,10 @@ import { Medicine } from '../components/Medicine';
 import { Nursing } from '../components/Nursing';
 import { Stomatology } from '../components/Stomatology';
 import { Chemicals } from '../components/Chemicals';
+import { Medworkshop } from '../components/Medworkshop';
+import { Stomaworkshop1 } from '../components/Stomaworkshop1';
+import { Stomaworkshop2 } from '../components/Stomaworkshop2';
+import { Stomaworkshop3 } from '../components/Stomaworkshop3';
 
 export const CmpRouter = () => {
   return (
@@ -17,7 +21,7 @@ export const CmpRouter = () => {
                 <div className='col-sm-12 pt-3 card animate__animated animate__fadeIn'>
                     <h1><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
                     <div className='jornadas' style={{padding: 0, margin: 0}}>
-                        <img src='https://i.imgur.com/i6wM5sO.png' title="source: imgur.com" alt="Jornadas" width="100%" height="300px"/>
+                        <img src='https://i.imgur.com/9fULOzU.png' title="source: imgur.com" alt="Jornadas" width="100%" height="auto"/>
                     </div>
                     <div className='mt-3'>
                         <Switch>
@@ -67,6 +71,30 @@ export const CmpRouter = () => {
                                 exact
                                 path="/chemicals"
                                 component={ Chemicals }
+                            />
+
+                            <Route
+                                exact
+                                path="/medworkshop"
+                                component={ Medworkshop }
+                            />
+
+                            <Route
+                                exact
+                                path="/restorationworkshop"
+                                component={ Stomaworkshop1 }
+                            />
+
+                            <Route
+                                exact
+                                path="/techniquesworkshop"
+                                component={ Stomaworkshop2 }
+                            />
+
+                            <Route
+                                exact
+                                path="/surgeryworkshop"
+                                component={ Stomaworkshop3 }
                             />
 
                             <Redirect to="/home"/>

@@ -1,4 +1,4 @@
-import { db, dbc } from '../firebase/firebase-config';
+import { db, db2, dbc } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
 
 export const saveRegistro = async (values) => {
@@ -32,9 +32,9 @@ export const fetchRegistro = async (values) => {
     try {
         const userInfo = await db.collection(`${values}/registroJornada/info`).get();
         const day = 1;
+        const arr = [];
         if (userInfo.size == 1) {
             console.log("actualizar estado");
-            const arr = [];
 
             userInfo.forEach(doc => {
 
@@ -70,5 +70,57 @@ export const fetchRegistro = async (values) => {
 
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const updateCounter = async (values) => {
+    try {
+        if (values) {
+            let workshops = await db2.collection('/counters').get();
+            workshops.forEach(doc => {
+    
+                db2.collection('/counters').doc(doc.id).update({ medworkshop: values.medworkshop });
+                db2.collection('/counters').doc(doc.id).update({ stomaworkshop1: values.stomaworkshop1 });
+                db2.collection('/counters').doc(doc.id).update({ stomaworkshop2: values.stomaworkshop2 });
+                db2.collection('/counters').doc(doc.id).update({ stomaworkshop3: values.stomaworkshop3 });
+
+            });
+            return true;
+        } else {
+            return false;
+        }
+    } catch (err) {
+        console.log(err);
+        swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al actualizar los espacios en los talleres disponibles',
+        });
+        return false;
+    }
+}
+
+export const getCounter = async () => {
+    try {
+        let workshops = await db2.collection('/counters').get();
+        let arr = [];
+        
+        workshops.forEach(doc => {
+    
+            arr.push({
+                id: doc.id,
+                ...doc.data()
+            });
+
+        });
+
+        return arr[0];
+    } catch (err) {
+        console.log(err);
+        swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error en la obtención de cupos',
+        });
     }
 }

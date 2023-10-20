@@ -5,7 +5,7 @@ export const ToBeDefined = () => {
   return (
     <>
         <Grid item sm={12} xs={12} sx={{ mt: '20%', mb: '20%'}}>
-            <h1>Programa del módulo por definir</h1>
+            <h1>Programa por definir</h1>
         </Grid>
     </>
   )

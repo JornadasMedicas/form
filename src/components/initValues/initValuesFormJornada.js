@@ -1,6 +1,5 @@
 export const initValuesFormJordana = {
     categoria: 'Estudiante (Anahuac)',
-    matricula: '',
     acronimo: '',
     nombre: '',
     apellido: '',
@@ -17,7 +16,15 @@ export const initValuesFormJordana = {
     isAssistDay3: false,
     isMedWorkshop: false,
     isStomaWorkshop1: false,
-    isStomaWorkshop2: false
+    isStomaWorkshop2: false,
+    isStomaWorkshop3: false
+}
+
+export const initState = {
+	t1: false,
+	t2: false,
+	t3: false,
+	t4: false
 }
 
 export const initValuesFormJordanaErrors = {
