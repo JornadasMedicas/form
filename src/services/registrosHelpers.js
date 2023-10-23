@@ -28,34 +28,72 @@ export const saveRegistro = async (values) => {
     }
 }
 
-export const fetchRegistro = async (values) => {
+export const fetchRegistro = async (email, fecha) => {
     try {
-        const userInfo = await db.collection(`${values}/registroJornada/info`).get();
-        const day = 1;
+        const userInfo = await db.collection(`${email}/registroJornada/info`).get();
         const arr = [];
         if (userInfo.size == 1) {
-            console.log("actualizar estado");
+            switch (fecha) {
+                case "23 de Noviembre 2023":
+                    userInfo.forEach(doc => {
 
-            userInfo.forEach(doc => {
+                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
+        
+                        arr.push({
+                            id: doc.id,
+                            day: 1,
+                            ...doc.data()
+                        });
+                    });
+                    swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Asistencia confirmada',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    break;
+                
+                case "24 de Noviembre 2023":
+                    userInfo.forEach(doc => {
 
-                db.collection(`${values}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
+                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay2: true });
+        
+                        arr.push({
+                            id: doc.id,
+                            day: 2,
+                            ...doc.data()
+                        });
+                    });
+                    swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Asistencia confirmada',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    break;
+                
+                case "25 de Noviembre 2023":
+                    userInfo.forEach(doc => {
 
-                /* arr.push({
-                    id: doc.id,
-                    day: day,
-                    ...doc.data()
-                }); */
-            });
-
-            
-
-            swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Asistencia confirmada',
-                showConfirmButton: false,
-                timer: 1000
-            })
+                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay3: true });
+        
+                        arr.push({
+                            id: doc.id,
+                            day: 3,
+                            ...doc.data()
+                        });
+                    });
+                    swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Asistencia confirmada',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    break;
+            }
 
             return arr;
 

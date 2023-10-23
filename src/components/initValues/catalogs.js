@@ -22,6 +22,12 @@ export const categorias = [
 	'Médico Residente ISSSTE'
 ]
 
+export const fechas = [
+	'23 de Noviembre 2023',
+	'24 de Noviembre 2023',
+	'25 de Noviembre 2023'
+]
+
 export const talleres = {
 	isMedWorkshop: '<b>23 de Noviembre</b> - Estructura de Intervención en los Cuidados Paliativos, un Enfoque Multidisciplinario e Intersectorial',
 	isStomaWorkshop1: '<b>23 de Noviembre</b> - Complicaciones y Errores en el Tratamiento de Restauración Interproximales',

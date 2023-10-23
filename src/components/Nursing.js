@@ -8,10 +8,10 @@ import SendIcon from '@mui/icons-material/Send';
 export const Nursing = () => {
     return (
         <>
-            <Box sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: '80px', marginTop: '-10px' }}>
+            <Box sx={{ paddingLeft: 0, paddingRight: 0, marginBottom: '100px', marginTop: '-10px'}}>
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <h1 className='fonts animate__animated animate__fadeInDown' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>E</strong>nfermería<strong></strong></h1>
-                <ToBeDefined></ToBeDefined>
+                <img style={{ marginTop: 5}} width={'100%'} height={'auto'} src='https://i.imgur.com/2SC1v7t.png'></img>
                 <Return />
                 <Grid item xs={16}>
                     <Link to={'/form'}>

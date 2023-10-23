@@ -20,6 +20,12 @@ export const initValuesFormJordana = {
     isStomaWorkshop3: false
 }
 
+export const initValuesRegister = {
+    fecha: '',
+    qrdata: '',
+    emaildata: ''
+}
+
 export const initState = {
 	t1: false,
 	t2: false,
