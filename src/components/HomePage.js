@@ -5,13 +5,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
+import DownloadIcon from '@mui/icons-material/Download';
 
 
 export const HomePage = () => {
 
     const matches = useMediaQuery('(max-width:900px)');
 
-    /* const fading = 'linear-gradient(to top, rgba(0,0,0,0.3), rgba(255,255,255,0.7) 0px), linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0) 140px)'; */
+    const onDownload = () => {
+        const link = document.createElement("a");
+        link.download = `JORNADAS.pdf`;
+        link.href = "https://www.dropbox.com/scl/fi/z1dj3wqiwfs5h4rowii80/JORNADAS.pdf?rlkey=adorlxp5txggdhl9gsn1o9imx&dl=1";
+        link.click();
+    };
 
     return (
         <>
@@ -33,15 +39,15 @@ export const HomePage = () => {
                 <Box sx={{ flexGrow: 1, marginTop: 5, marginBottom: 3 }}>
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
                         <Grid item xs={8}>
-                            <img width={'90%'} height={'auto'} src='https://i.imgur.com/ImWQYYO.png'></img>
+                            <img width={'80%'} height={'auto'} src='https://i.imgur.com/uUgE7i9.png'></img>
                         </Grid>
                         <Grid item xs={8} sx={{ overflow: 'hidden' }}>
-                            <img width={'90%'} height={'auto'} src='https://i.imgur.com/l3KTfHD.png'></img>
+                            <img width={'75%'} height={'auto'} src='https://i.imgur.com/NKG6YsK.png'></img>
                         </Grid>
                     </Grid>
                 </Box>
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
-                <Box sx={{ marginTop: 5 }}>
+                <Box sx={{ marginTop: 3 }}>
                     <h1 className='fonts animate__animated animate__fadeInUp' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>M</strong>ódulos</h1>
                 </Box>
                 <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
@@ -164,12 +170,19 @@ export const HomePage = () => {
                                 </Card>
                             </Link>
                         </Grid>
-                        <Grid item xs={16}>
-                            <Link to={'/form'}>
-                                <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' } }}>
-                                    Registro
+                        <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" }, marginTop: 1}}>
+                            <Grid item xs={8}>
+                                <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
+                                    Descargar Póster de Jornadas Original
                                 </Button>
-                            </Link>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Link to={'/form'}>
+                                    <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
+                                        Registro
+                                    </Button>
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Box>

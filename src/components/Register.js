@@ -16,7 +16,7 @@ export const Register = () => {
     let [invitados, setInvitados] = useState([]);
     const [disabled, setDisabled] = useState(true);
 
-    const fetchInvitado = async (email) => {
+    const fetchQRInvitado = async (email) => {
         let em = email.trim();
         const info = await fetchRegistro(em, values.fecha);
 
@@ -31,7 +31,7 @@ export const Register = () => {
                 ?
                 console.log('ERROR')
                 :
-                fetchInvitado(shot[1])
+                fetchQRInvitado(shot[1])
         }
 
         reset();
@@ -148,7 +148,7 @@ export const Register = () => {
                                     helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
                                     inputProps={{ maxLength: 4 }} */
                                     />
-                                    <Button disabled={disabled} endIcon={<SendIcon />} className='animate__animated animate__fadeInUp' variant='contained' onClick={fetchInvitado()} sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px'}}>
+                                    <Button disabled={disabled} endIcon={<SendIcon />} className='animate__animated animate__fadeInUp' variant='contained' /* onClick={fetchInvitado()} */ sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px'}}>
                                         Enviar
                                     </Button>
                             </Grid>
