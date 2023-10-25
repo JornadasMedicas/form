@@ -41,7 +41,7 @@ export const fetchRegistro = async (email, fecha) => {
         
                         arr.push({
                             id: doc.id,
-                            day: 1,
+                            day: 23,
                             ...doc.data()
                         });
                     });
@@ -61,7 +61,7 @@ export const fetchRegistro = async (email, fecha) => {
         
                         arr.push({
                             id: doc.id,
-                            day: 2,
+                            day: 24,
                             ...doc.data()
                         });
                     });
@@ -81,7 +81,7 @@ export const fetchRegistro = async (email, fecha) => {
         
                         arr.push({
                             id: doc.id,
-                            day: 3,
+                            day: 25,
                             ...doc.data()
                         });
                     });

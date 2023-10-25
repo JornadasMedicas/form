@@ -23,6 +23,15 @@ export const Register = () => {
         setInvitados([info[0]]);
     }
 
+    const fetchManualInvitado = async () => {
+        console.log(values.emaildata.trim().toUpperCase());
+        let em = values.emaildata.trim().toUpperCase();
+        const info = await fetchRegistro(em, values.fecha);
+
+        setInvitados([info[0]]);
+        reset();
+    }
+
     const sendData = () => {
         let shot = values.qrdata.toUpperCase().split('|');
 
@@ -148,7 +157,7 @@ export const Register = () => {
                                     helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
                                     inputProps={{ maxLength: 4 }} */
                                     />
-                                    <Button disabled={disabled} endIcon={<SendIcon />} className='animate__animated animate__fadeInUp' variant='contained' /* onClick={fetchInvitado()} */ sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px'}}>
+                                    <Button disabled={disabled} endIcon={<SendIcon />} variant='contained' onClick={fetchManualInvitado} sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px'}}>
                                         Enviar
                                     </Button>
                             </Grid>
