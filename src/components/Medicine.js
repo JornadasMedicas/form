@@ -4,6 +4,7 @@ import { ToBeDefined } from './ToBeDefined'
 import { Return } from './Return'
 import { Link } from 'react-router-dom'
 import SendIcon from '@mui/icons-material/Send';
+import { CountdownComponent } from './CountdownComponent'
 
 export const Medicine = () => {
 
@@ -16,13 +17,7 @@ export const Medicine = () => {
                 <h1 className='fonts animate__animated animate__fadeInDown' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>M</strong>edicina<strong></strong></h1>
                 <img style={{ marginTop: 5, marginBottom: matches ? '0px' : '-10px'}} width={'100%'} height={'auto'} src='https://i.imgur.com/89M6E1A.png'></img>
                 <Return />
-                <Grid item xs={16}>
-                    <Link to={'/form'}>
-                        <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' } }}>
-                            Registro
-                        </Button>
-                    </Link>
-                </Grid>
+                <CountdownComponent />
             </Box>
         </>
     )

@@ -41,11 +41,11 @@ export const CmpRouter = () => {
                                 component={ Register }
                             /> */}
 
-                            <Route
+                            {/* <Route
                                 exact
                                 path="/form"
                                 component={ Form }
-                            />
+                            /> */}
 
                             <Route
                                 exact
@@ -77,7 +77,7 @@ export const CmpRouter = () => {
                                 component={ Chemicals }
                             />
 
-                            <Route
+                            {/* <Route
                                 exact
                                 path="/medworkshop"
                                 component={ Medworkshop }
@@ -99,7 +99,7 @@ export const CmpRouter = () => {
                                 exact
                                 path="/surgeryworkshop"
                                 component={ Stomaworkshop3 }
-                            />
+                            /> */}
 
                             <Redirect to="/home"/>
                         </Switch>

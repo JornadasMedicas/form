@@ -4,8 +4,8 @@ import CardContent from '@mui/joy/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import SendIcon from '@mui/icons-material/Send';
 import DownloadIcon from '@mui/icons-material/Download';
+import { CountdownComponent } from './CountdownComponent';
 
 
 export const HomePage = () => {
@@ -121,18 +121,12 @@ export const HomePage = () => {
                             <img width={'95%'} height={'auto'} src='https://i.imgur.com/w9b87Bp.png'></img>
                         </Grid>
                     </Grid>
+                    <CountdownComponent />
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" }, marginTop: 1}}>
-                        <Grid item xs={8}>
-                            <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
+                        <Grid item xs={16}>
+                            <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '45%' }}>
                                 Descargar Póster de Jornadas Original
                             </Button>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Link to={'/form'}>
-                                <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
-                                    Registro
-                                </Button>
-                            </Link>
                         </Grid>
                     </Grid>
                 </Box>
