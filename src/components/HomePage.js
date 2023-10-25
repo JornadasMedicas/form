@@ -21,7 +21,7 @@ export const HomePage = () => {
 
     return (
         <>
-            <Box sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: '100px', marginTop: '-10px' }}>
+            <Box sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: matches ? '120px' : '100px', marginTop: '-10px' }}>
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <Typography sx={{ textAlign: 'justify', fontSize: 17, fontFamily: 'heebo', fontWeight: 400, paddingLeft: 2, paddingRight: 2 }}>
                     <b style={{ fontSize: '50px', color: '#b7402a'}}>E</b>l Centro de Alta Especialidad Dr. Rafael Lucio se llena de gusto y de entusiasmo en volver a organizar nuestro máximo evento académico anual que se ha llevado a cabo desde hace 25 años.
@@ -124,7 +124,7 @@ export const HomePage = () => {
                     <CountdownComponent />
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" }, marginTop: 1}}>
                         <Grid item xs={16}>
-                            <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '45%' }}>
+                            <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: matches ? '80%' : '45%' }}>
                                 Descargar Póster de Jornadas Original
                             </Button>
                         </Grid>

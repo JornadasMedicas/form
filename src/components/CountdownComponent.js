@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Countdown from 'react-countdown';
@@ -8,6 +8,8 @@ export const CountdownComponent = () => {
     const [disabled, setDisabled] = useState(true)
     const [pointeraction, setPointeraction] = useState('none')
     const [display, setDisplay] = useState(1)
+
+    const matches = useMediaQuery('(max-width:900px)');
 
     const countdownAction = () => {
         setDisabled(false);
@@ -32,7 +34,7 @@ export const CountdownComponent = () => {
             </Typography>
             <Grid sx={{ marginTop: 3}}>
                 <Link style={{ pointerEvents: pointeraction }} to={'/form'}>
-                    <Button disabled={disabled} variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '45%' }}>
+                    <Button disabled={disabled} variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: matches ? '80%' : '45%' }}>
                         Registro
                     </Button>
                 </Link>
