@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, Button, Card, CardMedia, Grid, Typography, Zoom } from '@mui/material'
 import CardCover from '@mui/joy/CardCover';
 import CardContent from '@mui/joy/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -112,77 +112,27 @@ export const HomePage = () => {
                 </Box>
                 {/* divider */}
                 <h1 className='fonts animate__animated animate__fadeInUp' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>T</strong>alleres</h1>
-                <Box sx={{ flexGrow: 1, marginTop: 3 }}>
+                <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                        <Grid className='anima' item xs={8} sx={{ transition: 'all 0.3s ease', ":hover": { cursor: 'pointer' }}}>
+                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/XYWN29u.png'></img>
+                        </Grid>
+                        <Grid className='anima' item xs={8} sx={{ transition: 'all 0.3s ease', ":hover": { cursor: 'pointer' } }}>
+                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/w9b87Bp.png'></img>
+                        </Grid>
+                    </Grid>
+                    <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" }, marginTop: 1}}>
                         <Grid item xs={8}>
-                            <Link to={'/medworkshop'} style={{ textDecoration: 'none' }}>
-                                <Card className='anima' sx={{ backgroundImage: 'url(https://thancguide.org/wp-content/uploads/2023/01/iStock-1313568172-hospice-palliative-care-scaled.jpg)', width: '95%', minHeight: '180px', marginLeft: 'auto', marginRight: 'auto', backgroundSize: '100%', ":hover": { cursor: 'pointer' }, transition: 'all 0.3s ease' }}>
-                                    <CardContent>
-                                        <Typography
-                                            sx={{ marginRight: 'auto', marginLeft: '20px', fontWeight: 'bold', fontSize: '18px', border: '1px solid white', backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
-                                            mt={{ sm: 17 }}
-                                        >
-                                            Cuidados Paliativos
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Link>
+                            <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
+                                Descargar Póster de Jornadas Original
+                            </Button>
                         </Grid>
                         <Grid item xs={8}>
-                            <Link to={'/restorationworkshop'} style={{ textDecoration: 'none' }}>
-                                <Card className='anima' sx={{ width: '95%', minHeight: '180px', marginLeft: 'auto', marginRight: 'auto', backgroundImage: 'url(https://centauro.com.mx/wp-content/uploads/Conoce-por-que-se-separan-los-dientes.jpg)', backgroundSize: '100%', ":hover": { cursor: 'pointer' }, transition: 'all 0.3s ease' }}>
-                                    <CardContent>
-                                        <Typography
-                                            sx={{ marginRight: 'auto', marginLeft: '20px', fontWeight: 'bold', fontSize: '17px', border: '1px solid white', backgroundColor: 'rgba(255, 255, 255, 0.5)', textAlign: 'left' }}
-                                            mt={{ sm: 14 }}
-                                        >
-                                            Tratamiento de Restauración<br />Interproximales
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Link to={'/techniquesworkshop'} style={{ textDecoration: 'none' }}>
-                                <Card className='anima' sx={{ backgroundImage: 'url(https://i0.wp.com/neural.es/wp-content/uploads/2018/11/leporino-dest.jpg?fit=705%2C390&ssl=1)', width: '95%', minHeight: '180px', marginLeft: 'auto', marginRight: 'auto', backgroundSize: '100%', ":hover": { cursor: 'pointer' }, transition: 'all 0.3s ease' }}>
-                                    <CardContent>
-                                        <Typography
-                                            sx={{ marginRight: 'auto', marginLeft: '20px', fontWeight: 'bold', fontSize: '17px', border: '1px solid white', backgroundColor: 'rgba(255, 255, 255, 0.5)', textAlign: 'left' }}
-                                            mt={{ sm: 14 }}
-                                        >
-                                            Técnicas Quirúrgicas en Pacientes<br />de Labio y Paladar Hendido
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Link to={'/surgeryworkshop'} style={{ textDecoration: 'none' }}>
-                                <Card className='anima' sx={{ backgroundImage: 'url(https://upload.wikimedia.org/wikipedia/commons/d/d5/Oral_surgery_150408-F-DD059-203.jpg)', width: '95%', minHeight: '180px', marginLeft: 'auto', marginRight: 'auto', backgroundSize: '100%', ":hover": { cursor: 'pointer' }, transition: 'all 0.3s ease' }}>
-                                    <CardContent>
-                                        <Typography
-                                            sx={{ marginRight: 'auto', marginLeft: '20px', fontWeight: 'bold', fontSize: '18px', border: '1px solid white', backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
-                                            mt={{ sm: 17 }}
-                                        >
-                                            Cirugía Maxilofacial en Cuba
-                                        </Typography>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        </Grid>
-                        <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" }, marginTop: 1}}>
-                            <Grid item xs={8}>
-                                <Button onClick={onDownload} variant="contained" endIcon={<DownloadIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
-                                    Descargar Póster de Jornadas Original
+                            <Link to={'/form'}>
+                                <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
+                                    Registro
                                 </Button>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Link to={'/form'}>
-                                    <Button variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: '90%' }}>
-                                        Registro
-                                    </Button>
-                                </Link>
-                            </Grid>
+                            </Link>
                         </Grid>
                     </Grid>
                 </Box>

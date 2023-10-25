@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ModulesTableGrid } from './ModulesTableGrid'
-import { Box, Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, TextField, useMediaQuery } from '@mui/material'
+import { Box, Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, Tab, TextField, useMediaQuery } from '@mui/material'
 import { fetchRegistro } from '../services/registrosHelpers';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -8,6 +8,7 @@ import { fechas } from './initValues/catalogs';
 import { initValuesRegister } from './initValues/initValuesFormJornada';
 import useFormRegister from '../hooks/useFormRegister';
 import SendIcon from '@mui/icons-material/Send';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 export const Register = () => {
 
@@ -57,12 +58,33 @@ export const Register = () => {
         sendData()
     }
 
+    const [value, setValue] = React.useState('1');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
 
     return (
         <>
             <Box sx={{ paddingLeft: 2, paddingRight: 2, marginBottom: '80px', marginTop: '-10px' }}>
                 {/* MIHO001029IX8|ROJERU.SAN1983@GMAIL.COM|NOMBRE|APELLIDO| */}
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
+                <Box sx={{ width: '100%', typography: 'body1'}}>
+                    <TabContext value={value}>
+                        <Box sx={{ borderRadius: 3, boxShadow: 3, marginBottom: 3}}>
+                            <TabList textColor='secondary' onChange={handleChange} aria-label="lab API tabs example" centered>
+                                <Tab label="Módulos" value="1" />
+                                <Tab label="Talleres" value="2" />
+                            </TabList>
+                        </Box>
+                        <Box sx={{ borderColor: 'divider', borderRadius: 3, boxShadow: 3}}>
+                            <TabPanel value="1">Item One</TabPanel>
+                            <TabPanel value="2">Item Two</TabPanel>
+                            <TabPanel value="3">Item Three</TabPanel>
+                        </Box>
+                    </TabContext>
+                </Box>
                 <Grid item sm={12} xs={12} sx={{ mt: 2 }}>
                     <Box sx={{ marginBottom: 2 }}>
                         <h1 className='fonts animate__animated animate__fadeInUp' style={{ fontSize: 32 }}>

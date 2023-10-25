@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 /* import { GenerateQR } from '../components/GenerateQR' */
 import { Register } from '../components/Register';
 import { Form } from '../components/Form';
@@ -19,9 +19,13 @@ export const CmpRouter = () => {
         <div className='container-fluid text-center'>
             <div className='row'>
                 <div className='col-sm-12 pt-3 card animate__animated animate__fadeIn'>
-                    <h1><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
+                    <Link to={'/home'} style={{ textDecoration: 'none', color: 'black' }}>
+                        <h1><strong style={{color: '#b7402a'}}>J</strong>ornadas <strong style={{color: '#b7402a'}}>M</strong>édicas 2023</h1>
+                    </Link>
                     <div className='jornadas' style={{padding: 0, margin: 0}}>
-                        <img src='https://i.imgur.com/9fULOzU.png' title="source: imgur.com" alt="Jornadas" width="100%" height="auto"/>
+                        <Link to={'/home'}>
+                            <img src='https://i.imgur.com/9fULOzU.png' title="source: imgur.com" alt="Jornadas" width="100%" height="auto"/>
+                        </Link>
                     </div>
                     <div className='mt-3'>
                         <Switch>
@@ -31,11 +35,11 @@ export const CmpRouter = () => {
                                 component={ GenerateQR }
                             /> */}
 
-                            <Route 
+                            {/* <Route 
                                 exact
                                 path="/register"
                                 component={ Register }
-                            />
+                            /> */}
 
                             <Route
                                 exact

@@ -414,7 +414,7 @@ export const Form = () => {
 
 				</FormControl>
 
-				<Typography sx={{ mt: 3, textAlign: 'left', textDecoration: 'underline' }}>
+				<Typography sx={{ mt: 3, mb: 3, textAlign: 'left', textDecoration: 'underline' }}>
 					¿Desea más Información?
 					Ponerse en contacto con la Subdirección de Enseñanza, Centro de Alta Especialidad Dr. Rafael Lucio al 2288144500 Ext 1106 lun - vier 07:00 a 15:00 hrs
 				</Typography>
