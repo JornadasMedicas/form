@@ -25,7 +25,7 @@ export const CountdownComponent = () => {
             <Typography sx={{ fontSize: 24, fontFamily: 'heebo',  display: display}}>
                 {display === 1 ? 
                 <>
-                    ¡<b style={{ fontSize: '28px', color: '#b7402a'}}>E</b>L REGISTRO SE HABILITARÁ NUEVAMENTE EN <b style={{ color: 'red' }}><Countdown date={registerDay} onComplete={countdownAction}/></b> DÍAS!
+                    ¡<b style={{ fontSize: '28px', color: '#b7402a'}}>I</b>NICIA TU REGISTRO A PARTIR DEL 3 DE NOVIEMBRE DEL 2023! <br/> <p>FALTAN <b style={{ color: 'red' }}><Countdown date={registerDay} onComplete={countdownAction}/></b> DÍAS</p>
                 </> 
                 :
                 <>

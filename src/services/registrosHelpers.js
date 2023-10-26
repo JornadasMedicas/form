@@ -1,5 +1,10 @@
-import { db, db2, dbc } from '../firebase/firebase-config';
+import { db, db2 } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
+
+const registerDay1 = new Date("October 26, 2023");
+const registerDay2 = new Date("October 27, 2023");
+const registerDay3 = new Date("October 28, 2023");
+const dnow = Date.now();
 
 export const saveRegistro = async (values) => {
     try {
@@ -28,71 +33,72 @@ export const saveRegistro = async (values) => {
     }
 }
 
-export const fetchRegistro = async (email, fecha) => {
+export const fetchRegistro = async (email) => {
     try {
         const userInfo = await db.collection(`${email}/registroJornada/info`).get();
         const arr = [];
         if (userInfo.size == 1) {
-            switch (fecha) {
-                case "23 de Noviembre 2023":
-                    userInfo.forEach(doc => {
+            if (dnow > registerDay1 && dnow < registerDay2) {
+                console.log('entra día 1');
+                userInfo.forEach(doc => {
 
-                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
-        
-                        arr.push({
-                            id: doc.id,
-                            day: 23,
-                            ...doc.data()
-                        });
+                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
+    
+                    arr.push({
+                        id: doc.id,
+                        day: 23,
+                        ...doc.data()
                     });
-                    swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Asistencia confirmada',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                    break;
-                
-                case "24 de Noviembre 2023":
-                    userInfo.forEach(doc => {
+                });
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Asistencia confirmada',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
 
-                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay2: true });
-        
-                        arr.push({
-                            id: doc.id,
-                            day: 24,
-                            ...doc.data()
-                        });
-                    });
-                    swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Asistencia confirmada',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                    break;
-                
-                case "25 de Noviembre 2023":
-                    userInfo.forEach(doc => {
+            if (dnow > registerDay2 && dnow < registerDay3) {
+                console.log('entra día 2');
+                userInfo.forEach(doc => {
 
-                        db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay3: true });
-        
-                        arr.push({
-                            id: doc.id,
-                            day: 25,
-                            ...doc.data()
-                        });
+                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay2: true });
+    
+                    arr.push({
+                        id: doc.id,
+                        day: 24,
+                        ...doc.data()
                     });
-                    swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Asistencia confirmada',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                    break;
+                });
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Asistencia confirmada',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+
+            if (dnow > registerDay2) {
+                console.log('entra día 3');
+                userInfo.forEach(doc => {
+
+                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay3: true });
+    
+                    arr.push({
+                        id: doc.id,
+                        day: 25,
+                        ...doc.data()
+                    });
+                });
+                swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Asistencia confirmada',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
             }
 
             return arr;

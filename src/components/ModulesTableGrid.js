@@ -3,20 +3,17 @@ import { DataGrid } from '@mui/x-data-grid';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 60},
-    { field: 'rfc', headerName: 'RFC', width: 120 },
-    { field: 'email', headerName: 'Correo Electrónico', flex: 1 },
+    { field: 'name', headerName: 'Nombre', width: 150 },
+    { field: 'email', headerName: 'Correo', flex: 1 },
     { field: 'tel', headerName: 'Teléfono', flex: 1 },
     {
-        field: 'modulo', headerName: 'Módulo', flex: 1
-    },
-    { field: 'day', headerName: 'Día', flex: 1}
+        field: 'modulo', headerName: 'Módulo', flex: 1 },
+    { field: 'day', headerName: 'Día', flex: 1 }
 ];
 
 export const ModulesTableGrid = (invitados) => {
 
     let rows = [];
-
-    console.log("Tabla: ", invitados)
     
 
     /* useEffect(() => {
