@@ -14,6 +14,10 @@ import { Stomaworkshop2 } from '../components/Stomaworkshop2';
 import { Stomaworkshop3 } from '../components/Stomaworkshop3';
 
 export const CmpRouter = () => {
+
+    const registerDay = new Date("November 03, 2023 09:00:00");
+    const dnow = Date.now();
+    
   return (
     <main>
         <div className='container-fluid text-center'>
@@ -41,11 +45,14 @@ export const CmpRouter = () => {
                                 component={ Register }
                             /> */}
 
-                            {/* <Route
+                            {
+                            dnow > registerDay && 
+                            <Route
                                 exact
                                 path="/form"
                                 component={ Form }
-                            /> */}
+                            />
+                            }
 
                             <Route
                                 exact
