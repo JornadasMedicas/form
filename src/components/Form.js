@@ -135,11 +135,13 @@ export const Form = () => {
 				reset();
 				setCheckValue(initState);
 				setVisible('none')
-				setSent(true);
-				setTimeout(() => {
-					setSent(false);
-				}, 1000);
-				updateCounters();
+				//! DANGER
+				// setSent(true);
+				// setTimeout(() => {
+				// 	setSent(false);
+				// }, 1000);
+
+				// updateCounters();
 			}
 		} else {
 			setErrors(errors);
@@ -200,8 +202,8 @@ export const Form = () => {
 				stomaworkshop3: newCounters.stomaworkshop3 - 1
 			}
 		}
-
-		await updateCounter(newCounters);
+		//! DANGER
+		// await updateCounter(newCounters);
 	}
 
 	return (

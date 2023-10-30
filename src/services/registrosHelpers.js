@@ -8,10 +8,10 @@ const dnow = Date.now();
 
 export const saveRegistro = async (values) => {
     try {
-        const userInfo = await db.collection(`${values.email}/registroJornada/info`).get();
-        if (!userInfo.size == 1) {
+        const userInfo = await db.collection(`jornadas`).doc( values.email ).get();
+        if ( !userInfo.exists ) {
             //* NO SE HA REGISTRADO
-            const doc = await db.collection(`${values.email}/registroJornada/info`).add(values);
+            const doc = await db.collection( '/jornadas' ).doc( values.email ).set( values );
             return true;
         } else {
             //! YA SE REGISTRO
@@ -24,6 +24,7 @@ export const saveRegistro = async (values) => {
             return false;
         }
     } catch (err) {
+        console.log( err );
         swal.fire({
             icon: 'error',
             title: 'Error desconocido',
