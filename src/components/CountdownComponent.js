@@ -17,7 +17,7 @@ export const CountdownComponent = () => {
         setDisplay(2);
     }
 
-    const registerDay = new Date("October 03, 2023 09:00:00");
+    const registerDay = new Date("November 03, 2023 09:00:00");
 
   return (
     <>

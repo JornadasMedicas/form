@@ -70,9 +70,9 @@ export const Form = () => {
 		} else {
 			setShowCaptcha('none');
 		}
-	  
+
 	}, [values.modulo, values.isMedWorkshop, values.isStomaWorkshop1, values.isStomaWorkshop2, values.isStomaWorkshop3])
-	
+
 
 	const disableButton = () => {
 		setVisible('none');
@@ -136,12 +136,12 @@ export const Form = () => {
 				setCheckValue(initState);
 				setVisible('none')
 				//! DANGER
-				// setSent(true);
-				// setTimeout(() => {
-				// 	setSent(false);
-				// }, 1000);
+				setSent(true);
+				setTimeout(() => {
+					setSent(false);
+				}, 1000);
 
-				// updateCounters();
+				updateCounters();
 			}
 		} else {
 			setErrors(errors);
@@ -203,7 +203,7 @@ export const Form = () => {
 			}
 		}
 		//! DANGER
-		// await updateCounter(newCounters);
+		await updateCounter(newCounters);
 	}
 
 	return (
@@ -216,7 +216,7 @@ export const Form = () => {
 				</Typography >
 				<Grid container sx={{ marginBottom: 1 }}>
 					<Grid item xs={12}>
-						<img width={'40%'} height={'100%'} src='https://cms.posadas.com/documents/3110971/3153216/gamma-logo-529x159.png' style={{ filter: 'saturate(0)'}}></img>
+						<img width={'40%'} height={'100%'} src='https://cms.posadas.com/documents/3110971/3153216/gamma-logo-529x159.png' style={{ filter: 'saturate(0)' }}></img>
 					</Grid>
 				</Grid>
 				<Typography sx={{ textAlign: 'center', mb: 3, fontWeight: 'bold' }}>
@@ -374,15 +374,15 @@ export const Form = () => {
 						<fieldset className='rounded-3' style={{ border: '2px inset #5dadb6', borderRadius: '20px' }}>
 							<legend className='float-none w-auto px-3'>Talleres Medicina</legend>
 							<Grid item xs={2} sx={{ textAlign: 'left', paddingLeft: 5, paddingBottom: 2 }}>
-								<Checkbox disabled={cupos.medworkshop > 0 ? false : true} checked={checkValue.t1} onChange={(e) => assistWorkshop(1, e)} /> <b>23 de Noviembre</b> - Estructura de Intervención en los Cuidados Paliativos, un Enfoque Multidisciplinario e Intersectorial - {cupos.medworkshop > 0 ? <b style={{color: 'green'}}>{cupos.medworkshop} cupos disponibles</b> : <b style={{color: 'red'}}>cupos agotados</b>} 
+								<Checkbox disabled={cupos.medworkshop > 0 ? false : true} checked={checkValue.t1} onChange={(e) => assistWorkshop(1, e)} /> <b>23 de Noviembre</b> - Estructura de Intervención en los Cuidados Paliativos, un Enfoque Multidisciplinario e Intersectorial - {cupos.medworkshop > 0 ? <b style={{ color: 'green' }}>{cupos.medworkshop} cupos disponibles</b> : <b style={{ color: 'red' }}>cupos agotados</b>}
 							</Grid>
 						</fieldset>
 						<fieldset className='rounded-3' style={{ border: '2px inset #d25b67', borderRadius: '20px', marginTop: '15px', width: '100%' }}>
 							<legend className='float-none w-auto px-3'>Talleres Estomatología</legend>
 							<Grid item xs={2} sx={{ textAlign: 'left', paddingLeft: 5, paddingBottom: 2 }}>
-								<Checkbox disabled={cupos.stomaworkshop1 > 0 ? false : true} checked={checkValue.t2} onChange={(e) => assistWorkshop(2, e)} /><b>23 de Noviembre</b> - Complicaciones y Errores en el Tratamiento de Restauración Interproximales - {cupos.stomaworkshop1 > 0 ? <b style={{color: 'green'}}>{cupos.stomaworkshop1} cupos disponibles</b> : <b style={{color: 'red'}}>cupos agotados</b>} <br />
-								<Checkbox disabled={cupos.stomaworkshop2 > 0 ? false : true} checked={checkValue.t3} onChange={(e) => assistWorkshop(3, e)} /><b>24 de Noviembre</b> - Utilización de Distintas Técnicas Quirúrgicas en Pacientes de Labio y Paladar Hendido - {cupos.stomaworkshop2 > 0 ? <b style={{color: 'green'}}>{cupos.stomaworkshop2} cupos disponibles</b> : <b style={{color: 'red'}}>cupos agotados</b>} <br />
-								<Checkbox disabled={cupos.stomaworkshop3 > 0 ? false : true} checked={checkValue.t4} onChange={(e) => assistWorkshop(4, e)} /><b>24 de Noviembre</b> - Cirugía Maxilofacial en Cuba - {cupos.stomaworkshop3 > 0 ? <b style={{color: 'green'}}>{cupos.stomaworkshop3} cupos disponibles</b> : <b style={{color: 'red'}}>cupos agotados</b>}
+								<Checkbox disabled={cupos.stomaworkshop1 > 0 ? false : true} checked={checkValue.t2} onChange={(e) => assistWorkshop(2, e)} /><b>23 de Noviembre</b> - Complicaciones y Errores en el Tratamiento de Restauración Interproximales - {cupos.stomaworkshop1 > 0 ? <b style={{ color: 'green' }}>{cupos.stomaworkshop1} cupos disponibles</b> : <b style={{ color: 'red' }}>cupos agotados</b>} <br />
+								<Checkbox disabled={cupos.stomaworkshop2 > 0 ? false : true} checked={checkValue.t3} onChange={(e) => assistWorkshop(3, e)} /><b>24 de Noviembre</b> - Utilización de Distintas Técnicas Quirúrgicas en Pacientes de Labio y Paladar Hendido - {cupos.stomaworkshop2 > 0 ? <b style={{ color: 'green' }}>{cupos.stomaworkshop2} cupos disponibles</b> : <b style={{ color: 'red' }}>cupos agotados</b>} <br />
+								<Checkbox disabled={cupos.stomaworkshop3 > 0 ? false : true} checked={checkValue.t4} onChange={(e) => assistWorkshop(4, e)} /><b>24 de Noviembre</b> - Cirugía Maxilofacial en Cuba - {cupos.stomaworkshop3 > 0 ? <b style={{ color: 'green' }}>{cupos.stomaworkshop3} cupos disponibles</b> : <b style={{ color: 'red' }}>cupos agotados</b>}
 							</Grid>
 						</fieldset>
 					</Grid>

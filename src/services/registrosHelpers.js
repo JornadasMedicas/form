@@ -36,21 +36,19 @@ export const saveRegistro = async (values) => {
 
 export const fetchRegistro = async (email) => {
     try {
-        const userInfo = await db.collection(`${email}/registroJornada/info`).get();
+        const userInfo = await db.collection(`jornadas`).doc( email ).get();
         const arr = [];
-        if (userInfo.size == 1) {
+        if ( userInfo.exists ) {
             if (dnow > registerDay1 && dnow < registerDay2) {
                 console.log('entra día 1');
-                userInfo.forEach(doc => {
-
-                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
-    
-                    arr.push({
-                        id: doc.id,
-                        day: 23,
-                        ...doc.data()
-                    });
+                
+                db.collection(`jornadas`).doc( email ).update({ isAssistDay1: true });
+                const regs = await db.collection(`jornadas`).get();
+                
+                regs.forEach(assist => {
+                    arr.push(assist.data());
                 });
+
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -62,16 +60,14 @@ export const fetchRegistro = async (email) => {
 
             if (dnow > registerDay2 && dnow < registerDay3) {
                 console.log('entra día 2');
-                userInfo.forEach(doc => {
-
-                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay2: true });
-    
-                    arr.push({
-                        id: doc.id,
-                        day: 24,
-                        ...doc.data()
-                    });
+                
+                db.collection(`jornadas`).doc( email ).update({ isAssistDay2: true });
+                const regs = await db.collection(`jornadas`).get();
+                
+                regs.forEach(assist => {
+                    arr.push(assist.data());
                 });
+
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -83,16 +79,14 @@ export const fetchRegistro = async (email) => {
 
             if (dnow > registerDay2) {
                 console.log('entra día 3');
-                userInfo.forEach(doc => {
 
-                    db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay3: true });
-    
-                    arr.push({
-                        id: doc.id,
-                        day: 25,
-                        ...doc.data()
-                    });
+                db.collection(`jornadas`).doc( email ).update({ isAssistDay3: true });
+                const regs = await db.collection(`jornadas`).get();
+                
+                regs.forEach(assist => {
+                    arr.push(assist.data());
                 });
+
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',

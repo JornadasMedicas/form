@@ -41,11 +41,11 @@ export const CmpRouter = () => {
                                 component={ Register }
                             /> */}
 
-                            <Route
+                            {/* <Route
                                 exact
                                 path="/form"
                                 component={ Form }
-                            />
+                            /> */}
 
                             <Route
                                 exact
