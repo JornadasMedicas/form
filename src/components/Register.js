@@ -17,22 +17,25 @@ export const Register = () => {
 
     const matches = useMediaQuery('(max-width:900px)');
     const { values, handleInputChange, reset } = useFormRegister(initValuesRegister);
-    let [invitados, setInvitados] = useState([]);
+    let [assistModules, setAssistModules] = useState([]);
+    let [assistWorkshops, setAssistWorkshops] = useState([]);
     const [disabled, setDisabled] = useState(true)
     const [tab, setTab] = useState('1');
+
+    console.log(assistModules);
 
     const fetchQRInvitado = async (email) => {
         let em = email.trim();
         const info = await fetchRegistro(em);
 
-        setInvitados([info[0]]);
+        setAssistModules([...assistModules, info[0]]);
     }
 
     const fetchManualInvitado = async () => {
         let em = values.emaildata.trim().toUpperCase();
         const info = await fetchRegistro(em);
 
-        setInvitados([info[0]]);
+        setAssistModules([...assistModules, info[0]]);
         reset();
     }
 
@@ -98,28 +101,6 @@ export const Register = () => {
                                             <strong style={{ color: '#b7402a' }}>A</strong>sistencia de <strong style={{ color: '#b7402a' }}>M</strong>ódulos
                                         </h1>
                                     </Box>
-                                    {/* <Box sx={{ marginBottom: 4, marginTop: 4}}>
-                                        <FormControl>
-                                            <Grid item width={350} sx={{ marginLeft: 'auto', marginRight: 'auto'}}>
-                                                <InputLabel id='date-select'>
-                                                    Fecha de Registro
-                                                </InputLabel>
-                                                <Select
-                                                    labelId='date-select'
-                                                    label='Fechas --------------'
-                                                    variant='outlined'
-                                                    fullWidth
-                                                    value={values.fecha}
-                                                    onChange={(e) => handleInputChange(e.target.value, 'fecha')}
-                                                    sx={{ height: 50}}
-                                                >
-                                                    {fechas.map((cat, index) =>
-                                                        <MenuItem key={index} value={cat}>{cat}</MenuItem>
-                                                    )}
-                                                </Select>
-                                            </Grid>
-                                        </FormControl>
-                                    </Box> */}
                                     <Box sx={{ flexGrow: 1, marginTop: 5, marginBottom: 3 }}>
                                         <Grid container rowSpacing={5} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
                                             <Grid item xs={8}>
@@ -191,7 +172,7 @@ export const Register = () => {
                                 </Grid>
 
                                 <Box sx={{ mt: 4 }}>
-                                    <ModulesTableGrid value={invitados} />
+                                    <ModulesTableGrid value={assistModules} />
                                 </Box>
                             </TabPanel>
                             <TabPanel value="2" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
@@ -272,7 +253,7 @@ export const Register = () => {
                                 </Grid>
 
                                 <Box sx={{ mt: 4 }}>
-                                    <WorkshopsTableGrid />
+                                    <WorkshopsTableGrid value={assistWorkshops} />
                                 </Box>
                             </TabPanel>
                         </Box>
