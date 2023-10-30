@@ -39,7 +39,6 @@ export const fetchRegistro = async (email) => {
         const arr = [];
         if (userInfo.size == 1) {
             if (dnow > registerDay1 && dnow < registerDay2) {
-                console.log('entra día 1');
                 userInfo.forEach(doc => {
 
                     db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay1: true });
@@ -60,7 +59,6 @@ export const fetchRegistro = async (email) => {
             }
 
             if (dnow > registerDay2 && dnow < registerDay3) {
-                console.log('entra día 2');
                 userInfo.forEach(doc => {
 
                     db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay2: true });
@@ -80,8 +78,7 @@ export const fetchRegistro = async (email) => {
                 })
             }
 
-            if (dnow > registerDay2) {
-                console.log('entra día 3');
+            if (dnow > registerDay3) {
                 userInfo.forEach(doc => {
 
                     db.collection(`${email}/registroJornada/info`).doc(doc.id).update({ isAssistDay3: true });

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "centrodealtaespecialidad-949db",
+  "private_key_id": "e41a6e342c8ee7e630495bd001e641ea7770f2b9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCqBVIVkphK53Un\ndx+rWo8OtncjVxDYx44RfmzuuyFkSAK5SVcPubpOjEcnp4Qx/SfBVpljgfupYdzC\njoQ/4qUBN2GUVjA3iITgOg4PwiX0hNdHoVQX6hBiexAy6B9cA2v3vcimakPGMdnk\nIH2ZY9gg/mQpzevbRsTPabRUhQ89v60PWwZmmR+SW01oTGwas9BqI3V3Q86iVvzZ\nIDNMJGV14sjc5Ooac7jMJXGgpym3daKSoSLcxSxhS4emqH+16qQlz71QY0ii7GWM\nsqllOGnXpXjINLrdipXNOd5/E68INiXjSUjHGcMcLNn59qlKteNUaMdmNC6jvgHY\nNeDHbdyJAgMBAAECggEAEpgtX4WeWUbSFcRd9tAbKDlFc1yAz6yXeYtRn5RgtQZ5\nIcmHF4Ww/gkyeQBFoW/16putf+gF3YMB8VdD2HbRo/3qEp6QfGpWWe2PfyK1IvZq\nUv+uYkUrkJGz9lVTpK0NIFWlvamOiv0FvwDcq6tzRjx8OOQ4AM3PFX4ShlHdFlwT\n7gRddsJQxyxPfBynQT86faIl7jYFGTxdPULQXYvtkueyVMjpTWKZri2aUj4LMIlK\nyngCsKPLvnucPW/Jj3pwcKgZPxgA3r6TO1FStMsYekwMLHLSFaAjHbl+pRR6Ip1l\nmLH80BTJbKOL0CdDk0sk+bgN+MyXjR0DiBy6dMz++QKBgQDhBS7LMw0hjc6s/BDC\n3dmKIpNsKRmxoKPAQ+GgB9uXIRMEy+xBnGR6xtKcP79RvfG3QyHQxGhz/UwGOmqr\n9b8YTHqWWA681Faw/3yZQkq3VexFbnxmLaXdVheDsQ3n4h0QEO8qoAOnFyMtCGNp\nk/nofSRravTjrle8gDr48Cze3QKBgQDBba/iTEC8VcQf+Fzmekk88c08GYB7t+kd\nxdXQPYFuPcO9HrtCBzu5pPw8+wdCTPfcrNmpHRzvK5IdbpkMQ1J2bu5Tu/Eu7ztc\nTJ2NMc/GWeqLW1PXKZKUygv3BvyJlnGnwdR7sUVhYmJ4HIWYzqgcmR5nRe3Bujbn\nvkykGll7nQKBgQDRszXHklzzXyczWHj6UStRKyW+D5NtUOop3Fjg/VGsRttlhfE3\nt9p//Nf7WwEd2Wjww7Q4zUEWjwCRcVFFze/3YhaAE7IwUaY0rvPcE8ZzkrRshCmU\nQ4gme/vP82mlJri050MrsxGUXuCeMAoNMyUbf7w4CuYLZMdI2SucIJ+AVQKBgE1c\n9Y/pN6scEolG6ME1/7zkaVW0TXMuJ4rE6bOUJgRVp8goVnUeN4EUv94T+N9HsYsN\nhzDgeAYgwxwKdCQ3eO/thlzvOpOvE2rjKdCjL5sBs5FxQaM4+WuRNB/lJ3RQO70B\nBV9Dk6BTnVa08aogXZSymTps+Z8WP4eI0VaBQ3DxAoGAYDTCl6uwQuFV5zxcTszf\nAAAbswf8qM2ABj+CzsqwlMy31upuXy7ru3G4PAl1SJusLF+3QqzOHOcY2TM44HSZ\nxeX4xHvyj+Q1wckVDaPZKFqqHm3XvRHRvIC/Ks7G1v0HmSbkBzdj8TCPkVjv4O/E\nmoUlDJeQx6NrHnDK7oBoFmU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-wy71z@centrodealtaespecialidad-949db.iam.gserviceaccount.com",
+  "client_id": "111894593898358403421",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-wy71z%40centrodealtaespecialidad-949db.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
