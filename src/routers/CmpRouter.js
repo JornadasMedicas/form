@@ -8,10 +8,6 @@ import { Medicine } from '../components/Medicine';
 import { Nursing } from '../components/Nursing';
 import { Stomatology } from '../components/Stomatology';
 import { Chemicals } from '../components/Chemicals';
-import { Medworkshop } from '../components/Medworkshop';
-import { Stomaworkshop1 } from '../components/Stomaworkshop1';
-import { Stomaworkshop2 } from '../components/Stomaworkshop2';
-import { Stomaworkshop3 } from '../components/Stomaworkshop3';
 
 export const CmpRouter = () => {
 

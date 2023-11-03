@@ -39,10 +39,10 @@ export const HomePage = () => {
                 <Box sx={{ flexGrow: 1, marginTop: 5, marginBottom: 3 }}>
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
                         <Grid item xs={8}>
-                            <img width={'75%'} height={'auto'} src='https://i.imgur.com/CRGPcPG.png'></img>
+                            <img width={'70%'} height={'auto'} src='https://i.imgur.com/riAa3QB.png'></img>
                         </Grid>
                         <Grid item xs={8} sx={{ overflow: 'hidden' }}>
-                            <img width={'80%'} height={'auto'} src='https://i.imgur.com/KglboiH.png'></img>
+                            <img width={'80%'} height={'auto'} src='https://i.imgur.com/TyVnXqH.png?1'></img>
                         </Grid>
                     </Grid>
                 </Box>

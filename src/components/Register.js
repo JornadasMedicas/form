@@ -22,20 +22,18 @@ export const Register = () => {
     const [disabled, setDisabled] = useState(true)
     const [tab, setTab] = useState('1');
 
-    console.log(assistModules);
-
     const fetchQRInvitado = async (email) => {
         let em = email.trim();
         const info = await fetchRegistro(em);
 
-        setAssistModules([...assistModules, info[0]]);
+        setAssistModules( [info] );
     }
 
     const fetchManualInvitado = async () => {
         let em = values.emaildata.trim().toUpperCase();
         const info = await fetchRegistro(em);
 
-        setAssistModules([...assistModules, info[0]]);
+        setAssistModules( [info] );
         reset();
     }
 

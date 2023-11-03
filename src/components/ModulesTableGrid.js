@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { fetchModules } from '../api/congressAPI';
+import { fetchAssists } from '../services/registrosHelpers';
+import { setDay } from '../helpers/modulesRegisterDay';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'name', headerName: 'Nombre', width: 150 },
-    { field: 'email', headerName: 'Correo', flex: 1 },
+    { field: 'name', headerName: 'Nombre', width: 150, flex: 2 },
+    { field: 'email', headerName: 'Correo', flex: 2 },
     { field: 'tel', headerName: 'Teléfono', flex: 1 },
     {
         field: 'modulo', headerName: 'Módulo', flex: 1
@@ -18,32 +19,22 @@ export const ModulesTableGrid = (invitados) => {
 
     let rows = [];
 
-    if (invitados.value.length > 0) {
+    useEffect(() => { //every time page is reload retrieves assistants
+        const getAssists = async () => {
+            let assists = await fetchAssists();
+            setRws(assists);
+        }
 
-        invitados.value.forEach(partner => {
-            let nombre = partner.nombre + ' ' + partner.apellido
-            rows.push({
-                id: invitados.value.indexOf(partner) + 1,
-                name: nombre,
-                email: partner.email,
-                tel: partner.tel,
-                modulo: 'Químicos',
-                day: partner.day
-            })
+        getAssists();
+    }, [])
+
+    if ( rws.length > 0 ) {
+        rows = setDay(rws, rows)
+        rows.forEach((partner, i) => {
+            partner.id = i + 1
         });
     }
 
-    useEffect(() => {
-        const modules = async () => {
-            const asistentes = await fetchModules();
-            setRws(asistentes);
-        }
-
-        modules();
-    }, [])
-
-    console.log(rws);
-    
 
     return (
         <div style={{ height: 375, width: '100%' }}>
@@ -57,7 +48,6 @@ export const ModulesTableGrid = (invitados) => {
                 }}
                 loading={rows.length === 0 ? true : false}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
             />
         </div>
     )
