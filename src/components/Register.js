@@ -17,24 +17,25 @@ export const Register = () => {
 
     const matches = useMediaQuery('(max-width:900px)');
     const { values, handleInputChange, reset } = useFormRegister(initValuesRegister);
-    let [assistModules, setAssistModules] = useState([]);
-    let [assistWorkshops, setAssistWorkshops] = useState([]);
+    const [assistModules, setAssistModules] = useState([]);
+    const [assistWorkshops, setAssistWorkshops] = useState([]);
     const [disabled, setDisabled] = useState(true)
     const [tab, setTab] = useState('1');
+
 
     const fetchQRInvitado = async (email) => {
         let em = email.trim();
         const info = await fetchRegistro(em);
 
-        setAssistModules( [info] );
+        info.length > 0 && setAssistModules([info])
     }
 
     const fetchManualInvitado = async () => {
         let em = values.emaildata.trim().toUpperCase();
         const info = await fetchRegistro(em);
 
-        setAssistModules( [info] );
-        reset();
+        info.length > 0 && setAssistModules([info])
+        reset()
     }
 
     const handleChange = (event, newValue) => {
@@ -56,7 +57,7 @@ export const Register = () => {
     }
 
     useEffect(() => {
-      values.emaildata !== '' ? setDisabled(false) : setDisabled(true)
+        values.emaildata !== '' ? setDisabled(false) : setDisabled(true)
     }, [values.emaildata])
 
     useEffect(() => {
@@ -65,7 +66,7 @@ export const Register = () => {
         if (separator === 4) {
             sendData();
         }
-    
+
     }, [values.qrdata])
 
     return (
@@ -75,25 +76,25 @@ export const Register = () => {
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={tab}>
-                        <Box sx={{ borderRadius: 3, boxShadow: 4, marginBottom: 0, width: matches ? '80%' : '40%', marginLeft: 'auto', marginRight: 'auto'}}>
-                            <TabList 
-                            TabIndicatorProps={{
-                                style: {
-                                    backgroundColor: "#bd4f2b"
-                                }
-                            }}
-                            onChange={handleChange} 
-                            aria-label="lab API tabs example" 
-                            centered
-                            sx={{ height: '60px' }}
+                        <Box sx={{ borderRadius: 3, boxShadow: 4, marginBottom: 0, width: matches ? '80%' : '40%', marginLeft: 'auto', marginRight: 'auto' }}>
+                            <TabList
+                                TabIndicatorProps={{
+                                    style: {
+                                        backgroundColor: "#bd4f2b"
+                                    }
+                                }}
+                                onChange={handleChange}
+                                aria-label="lab API tabs example"
+                                centered
+                                sx={{ height: '60px' }}
                             >
-                                <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray'}}>Congreso</span>} value="1" />
-                                <Tab icon={<HandymanIcon color="action"/>} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '2' ? 'black' : 'gray' }}>Talleres</span>} value="2" />
+                                <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray' }}>Congreso</span>} value="1" />
+                                <Tab icon={<HandymanIcon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '2' ? 'black' : 'gray' }}>Talleres</span>} value="2" />
                             </TabList>
                         </Box>
                         <Box sx={{ borderRadius: 3, boxShadow: 0 }}>
                             <TabPanel value="1" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
-                                <Grid item sm={12} xs={12} sx={{ mt: 2, mb: 5}}>
+                                <Grid item sm={12} xs={12} sx={{ mt: 2, mb: 5 }}>
                                     <Box sx={{ marginBottom: 2 }}>
                                         <h1 className='fonts animate__animated animate__fadeInUp' style={{ fontSize: 32 }}>
                                             <strong style={{ color: '#b7402a' }}>A</strong>sistencia de <strong style={{ color: '#b7402a' }}>M</strong>ódulos
@@ -161,7 +162,13 @@ export const Register = () => {
                                                 helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
                                                 inputProps={{ maxLength: 4 }} */
                                                 />
-                                                <Button disabled={disabled} endIcon={<SendIcon />} variant='contained' onClick={fetchManualInvitado} sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px' }}>
+                                                <Button 
+                                                disabled={disabled} 
+                                                endIcon={<SendIcon />} 
+                                                variant='contained' 
+                                                onClick={fetchManualInvitado} 
+                                                sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px' }}
+                                                >
                                                     Enviar
                                                 </Button>
                                             </Grid>
@@ -170,7 +177,7 @@ export const Register = () => {
                                 </Grid>
 
                                 <Box sx={{ mt: 4 }}>
-                                    <ModulesTableGrid value={assistModules} />
+                                    <ModulesTableGrid assistModules={ assistModules } />
                                 </Box>
                             </TabPanel>
                             <TabPanel value="2" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>

@@ -4,7 +4,6 @@ export const setDay = (rws, rows) => {
 
         if (partner.isAssistDay1){
             rows.push({
-                ...rows,
                 name: nombre,
                 email: partner.email,
                 tel: partner.tel,

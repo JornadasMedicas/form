@@ -14,7 +14,7 @@ const columns = [
     { field: 'day', headerName: 'Día', flex: 1 }
 ];
 
-export const ModulesTableGrid = (invitados) => {
+export const ModulesTableGrid = ({ assistModules }) => { //IMPORTANT!!! use destructuring to aim array directly and listen to changes made over it, NOT object
     const [rws, setRws] = useState([])
 
     let rows = [];
@@ -28,7 +28,20 @@ export const ModulesTableGrid = (invitados) => {
         getAssists();
     }, [])
 
-    if ( rws.length > 0 ) {
+    useEffect(() => { //every time an assistant is registered, retrieves assistants
+        if (assistModules.length > 0) {
+            const getAssists = async () => {
+                let assists = await fetchAssists();
+                setRws(assists);
+            }
+
+            getAssists();
+        }
+
+    }, [assistModules])
+
+
+    if (rws.length > 0) {
         rows = setDay(rws, rows)
         rows.forEach((partner, i) => {
             partner.id = i + 1

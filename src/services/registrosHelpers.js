@@ -1,8 +1,8 @@
 import { db, db2 } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
 
-const registerDay1 = new Date("October 31, 2023");
-const registerDay2 = new Date("November 03, 2023");
+const registerDay1 = new Date("November 04, 2023");
+const registerDay2 = new Date("November 05, 2023");
 const registerDay3 = new Date("November 06, 2023");
 const dnow = Date.now();
 
@@ -60,17 +60,29 @@ export const fetchAssists = async () => {
 
 export const fetchRegistro = async (email) => {
     try {
-        const userInfo = await db.collection(`jornadas`).doc(email).get();
-        const arr = [];
-        if (userInfo.exists) {
+        let regs = await db.collection(`jornadas`).get();
+        let exists = false
+        let arr = [];
+
+        regs.forEach(assist => { //verify email in DB
+            if ( assist.id == email) {
+                exists = true
+            }
+        })
+
+        if (exists) {
             if (dnow > registerDay1 && dnow < registerDay2) {
-                console.log('entra día 1');
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay1: true });
-                const regs = await db.collection(`jornadas`).get();
 
                 regs.forEach(assist => {
                     arr.push(assist.data());
+                });
+
+                arr.forEach(partner => {
+                    if ( partner.email == email ) {
+                        partner.isAssistDay1 = true;
+                    }
                 });
 
                 swal.fire({
@@ -83,13 +95,17 @@ export const fetchRegistro = async (email) => {
             }
 
             if (dnow > registerDay2 && dnow < registerDay3) {
-                console.log('entra día 2');
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay2: true });
-                const regs = await db.collection(`jornadas`).get();
 
                 regs.forEach(assist => {
                     arr.push(assist.data());
+                });
+
+                arr.forEach(partner => {
+                    if ( partner.email == email ) {
+                        partner.isAssistDay2 = true;
+                    }
                 });
 
                 swal.fire({
@@ -101,14 +117,18 @@ export const fetchRegistro = async (email) => {
                 })
             }
 
-            if (dnow > registerDay2) {
-                console.log('entra día 3');
+            if (dnow > registerDay3) {
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay3: true });
-                const regs = await db.collection(`jornadas`).get();
 
                 regs.forEach(assist => {
                     arr.push(assist.data());
+                });
+
+                arr.forEach(partner => {
+                    if ( partner.email == email ) {
+                        partner.isAssistDay3 = true;
+                    }
                 });
 
                 swal.fire({
