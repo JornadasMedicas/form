@@ -19,14 +19,14 @@ export const ModulesTableGrid = ({ assistModules }) => { //IMPORTANT!!! use dest
 
     let rows = [];
 
-    useEffect(() => { //every time page is reload retrieves assistants
+    /* useEffect(() => { //every time page is reload retrieves assistants
         const getAssists = async () => {
             let assists = await fetchAssists();
             setRws(assists);
         }
 
         getAssists();
-    }, [])
+    }, []) */
 
     useEffect(() => { //every time an assistant is registered, retrieves assistants
         if (assistModules.length > 0) {

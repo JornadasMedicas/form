@@ -17,7 +17,11 @@ export const initValuesFormJordana = {
     isMedWorkshop: false,
     isStomaWorkshop1: false,
     isStomaWorkshop2: false,
-    isStomaWorkshop3: false
+    isStomaWorkshop3: false,
+    isMedAssistDay1: false,
+    isStoma1AssistDay1: false,
+    isStoma2AssistDay2: false,
+    isStoma3AssistDay2: false
 }
 
 export const initValuesRegister = {
@@ -27,10 +31,10 @@ export const initValuesRegister = {
 }
 
 export const initState = {
-	t1: false,
-	t2: false,
-	t3: false,
-	t4: false
+    t1: false,
+    t2: false,
+    t3: false,
+    t4: false
 }
 
 export const initValuesFormJordanaErrors = {

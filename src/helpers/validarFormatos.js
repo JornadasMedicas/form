@@ -38,8 +38,10 @@ export const validarFormatoCrearRegistro = (values) => {
         errors = { ...errors, 'apellido': { ...errors.apellido, error: true } }
     }
 
-    if (values.rfc === '' || values.rfc.length !== 13) {
-        errors = { ...errors, 'rfc': { ...errors.rfc, error: true } }
+    if (values.rfc !== '') {
+        if (values.rfc.length !== 13) {
+            errors = { ...errors, 'rfc': { ...errors.rfc, error: true } }
+        }
     }
 
     if (!validateEmail(values.email)) {
@@ -58,7 +60,7 @@ export const validarFormatoCrearRegistro = (values) => {
         errors = { ...errors, 'ciudad': { ...errors.ciudad, error: true } }
     }
 
-    if ((values.acronimo != '' && values.nombre != '' && values.apellido != '' && values.rfc != '' && values.email != '' && values.tel != '' && values.ciudad != '') && (values.modulo != '' || values.isMedWorkshop === true || values.isStomaWorkshop1 === true || values.isStomaWorkshop2 === true || values.isStomaWorkshop3 === true)) {
+    if ((values.acronimo != '' && values.nombre != '' && values.apellido != '' && values.email != '' && values.tel != '' && values.ciudad != '') && (values.modulo != '' || values.isMedWorkshop === true || values.isStomaWorkshop1 === true || values.isStomaWorkshop2 === true || values.isStomaWorkshop3 === true)) {
         display = true;
     }
 

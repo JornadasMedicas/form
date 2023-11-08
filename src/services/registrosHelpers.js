@@ -1,9 +1,9 @@
 import { db, db2 } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
 
-const registerDay1 = new Date("November 04, 2023");
-const registerDay2 = new Date("November 05, 2023");
-const registerDay3 = new Date("November 06, 2023");
+const registerDay1 = new Date("November 08, 2023");
+const registerDay2 = new Date("November 09, 2023");
+const registerDay3 = new Date("November 10, 2023");
 const dnow = Date.now();
 
 export const saveRegistro = async (values) => {
@@ -46,8 +46,131 @@ export const fetchAssists = async () => {
         }
 
         let filtered = arr.filter(assist => assist.isAssistDay1 || assist.isAssistDay2 || assist.isAssistDay3)
-        
+
         return filtered;
+    } catch (error) {
+        console.log(error);
+        swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error en la obtención de asistentes',
+        });
+    }
+}
+
+export const addFields = async () => {
+    try {
+        const regs = await db.collection(`jornadas`).get();
+        const arr = []
+
+        regs.forEach(assist => {
+            console.log(assist.id);
+            /* db.collection(`jornadas`).doc(assist.id).set({
+                isMedAssistDay1: false,
+                isStoma1AssistDay1: false,
+                isStoma2AssistDay2: false,
+                isStoma3AssistDay2: false
+            }, { merge: true }); */
+        })
+    } catch (error) {
+        console.log(error);
+        swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error en añadir los campos',
+        });
+    }
+}
+
+export const fetchWorkshopRegistro = async (email, subtab) => {
+    try {
+        let regs = await db.collection(`jornadas`).get();
+        let exists = false
+        let allowed = false
+        let arr = [];
+        let partner = [];
+
+        regs.forEach(assist => { //verify email in DB
+            if (assist.id == email) {
+                exists = true
+                partner.push(assist.data())
+            }
+        })
+
+        if (exists) {
+            switch (subtab) {
+                case '1':
+                    console.log(partner);
+                    /* regs.forEach(assist => { //verify email in DB
+                        if (assist.id == email) {
+                            if (assist.data().isMedWorkshop === true) {
+                                db.collection(`jornadas`).doc(email).update({ isMedAssistDay1: true });
+                                regs.forEach(assist => {
+                                    arr.push(assist.data());
+                                });
+                                arr.forEach(partner => {
+                                    if (partner.email == email) {
+                                        partner.isMedAssistDay1 = true;
+                                    }
+                                });
+                            } else {
+                                swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'El usuario no se encuentra inscrito en este taller',
+                                });
+                            }
+                        }
+                    }) */
+                    break;
+
+                case '2':
+                    db.collection(`jornadas`).doc(email).update({ isStoma1AssistDay1: true });
+                    regs.forEach(assist => {
+                        arr.push(assist.data());
+                    });
+                    arr.forEach(partner => {
+                        if (partner.email == email) {
+                            partner.isStoma1AssistDay1 = true;
+                        }
+                    });
+                    break;
+
+                case '3':
+                    db.collection(`jornadas`).doc(email).update({ isStoma2AssistDay2: true });
+                    regs.forEach(assist => {
+                        arr.push(assist.data());
+                    });
+                    arr.forEach(partner => {
+                        if (partner.email == email) {
+                            partner.isStoma2AssistDay2 = true;
+                        }
+                    });
+                    break;
+
+                case '4':
+                    db.collection(`jornadas`).doc(email).update({ isStoma3AssistDay2: true });
+                    regs.forEach(assist => {
+                        arr.push(assist.data());
+                    });
+                    arr.forEach(partner => {
+                        if (partner.email == email) {
+                            partner.isStoma3AssistDay2 = true;
+                        }
+                    });
+                    break;
+            }
+
+            return arr;
+
+        } else {
+            swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El usuario no fue encontrado',
+            });
+            return [];
+        }
     } catch (error) {
         console.log(error);
         swal.fire({
@@ -65,7 +188,7 @@ export const fetchRegistro = async (email) => {
         let arr = [];
 
         regs.forEach(assist => { //verify email in DB
-            if ( assist.id == email) {
+            if (assist.id == email) {
                 exists = true
             }
         })
@@ -80,7 +203,7 @@ export const fetchRegistro = async (email) => {
                 });
 
                 arr.forEach(partner => {
-                    if ( partner.email == email ) {
+                    if (partner.email == email) {
                         partner.isAssistDay1 = true;
                     }
                 });
@@ -103,7 +226,7 @@ export const fetchRegistro = async (email) => {
                 });
 
                 arr.forEach(partner => {
-                    if ( partner.email == email ) {
+                    if (partner.email == email) {
                         partner.isAssistDay2 = true;
                     }
                 });
@@ -126,7 +249,7 @@ export const fetchRegistro = async (email) => {
                 });
 
                 arr.forEach(partner => {
-                    if ( partner.email == email ) {
+                    if (partner.email == email) {
                         partner.isAssistDay3 = true;
                     }
                 });
