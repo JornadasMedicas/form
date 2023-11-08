@@ -26,7 +26,7 @@ export const validarFormatoCrearRegistro = (values) => {
 
     if (values.acronimo === '') {
         errors = { ...errors, 'acronimo': { ...errors.acronimo, error: true} }
-    } else if (!values.acronimo.endsWith('.')) {
+    } else if (!values.acronimo.trim().endsWith('.')) {
         errors = { ...errors, 'acronimo': { ...errors.acronimo, error: true, msg: "El acrónimo debe terminar en punto (.)"} }
     }
 
