@@ -34,134 +34,126 @@ export const saveRegistro = async (values) => {
     }
 }
 
-export const fetchAssists = async () => {
+export const fetchAssistant = async (email) => {
     try {
+        const regs = await db.collection(`jornadas`).where('email', '==', email).get();
         const arr = [];
-        const regs = await db.collection(`jornadas`).get();
 
         if (!regs.empty) {
             regs.forEach((assist) => {
                 arr.push(assist.data());
             })
+            return arr[0];
+        } else {
+            swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El usuario no fue encontrado',
+            });
+            return false;
         }
-
-        let filtered = arr.filter(assist => assist.isAssistDay1 || assist.isAssistDay2 || assist.isAssistDay3)
-
-        return filtered;
     } catch (error) {
         console.log(error);
         swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Error en la obtención de asistentes',
-        });
-    }
-}
-
-export const addFields = async () => {
-    try {
-        const regs = await db.collection(`jornadas`).get();
-        const arr = []
-
-        regs.forEach(assist => {
-            console.log(assist.id);
-            /* db.collection(`jornadas`).doc(assist.id).set({
-                isMedAssistDay1: false,
-                isStoma1AssistDay1: false,
-                isStoma2AssistDay2: false,
-                isStoma3AssistDay2: false
-            }, { merge: true }); */
-        })
-    } catch (error) {
-        console.log(error);
-        swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error en añadir los campos',
+            text: 'Error en la obtención del asistente',
         });
     }
 }
 
 export const fetchWorkshopRegistro = async (email, subtab) => {
     try {
-        let regs = await db.collection(`jornadas`).get();
-        let exists = false
-        let allowed = false
-        let arr = [];
-        let partner = [];
+        const regs = await db.collection(`jornadas`).where('email', '==', email).get();
 
-        regs.forEach(assist => { //verify email in DB
-            if (assist.id == email) {
-                exists = true
-                partner.push(assist.data())
-            }
-        })
-
-        if (exists) {
+        if (!regs.empty) {
             switch (subtab) {
                 case '1':
-                    console.log(partner);
-                    /* regs.forEach(assist => { //verify email in DB
-                        if (assist.id == email) {
-                            if (assist.data().isMedWorkshop === true) {
-                                db.collection(`jornadas`).doc(email).update({ isMedAssistDay1: true });
-                                regs.forEach(assist => {
-                                    arr.push(assist.data());
-                                });
-                                arr.forEach(partner => {
-                                    if (partner.email == email) {
-                                        partner.isMedAssistDay1 = true;
-                                    }
-                                });
-                            } else {
-                                swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: 'El usuario no se encuentra inscrito en este taller',
-                                });
-                            }
+                    regs.forEach(assist => {
+                        if (assist.data().isMedWorkshop === true) {
+                            db.collection(`jornadas`).doc(email).update({ isMedAssistDay1: true });
+                            swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Asistencia confirmada',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        } else {
+                            swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'El usuario no se encuentra inscrito en este taller',
+                            });
                         }
-                    }) */
+                    })
                     break;
 
                 case '2':
-                    db.collection(`jornadas`).doc(email).update({ isStoma1AssistDay1: true });
                     regs.forEach(assist => {
-                        arr.push(assist.data());
-                    });
-                    arr.forEach(partner => {
-                        if (partner.email == email) {
-                            partner.isStoma1AssistDay1 = true;
+                        if (assist.data().isStomaWorkshop1 === true) {
+                            db.collection(`jornadas`).doc(email).update({ isStoma1AssistDay1: true });
+                            swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Asistencia confirmada',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        } else {
+                            swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'El usuario no se encuentra inscrito en este taller',
+                            });
                         }
-                    });
+                    })
                     break;
 
                 case '3':
-                    db.collection(`jornadas`).doc(email).update({ isStoma2AssistDay2: true });
                     regs.forEach(assist => {
-                        arr.push(assist.data());
-                    });
-                    arr.forEach(partner => {
-                        if (partner.email == email) {
-                            partner.isStoma2AssistDay2 = true;
+                        if (assist.data().isStomaWorkshop2 === true) {
+                            db.collection(`jornadas`).doc(email).update({ isStoma2AssistDay2: true });
+                            swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Asistencia confirmada',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        } else {
+                            swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'El usuario no se encuentra inscrito en este taller',
+                            });
                         }
-                    });
+                    })
                     break;
 
                 case '4':
-                    db.collection(`jornadas`).doc(email).update({ isStoma3AssistDay2: true });
                     regs.forEach(assist => {
-                        arr.push(assist.data());
-                    });
-                    arr.forEach(partner => {
-                        if (partner.email == email) {
-                            partner.isStoma3AssistDay2 = true;
+                        if (assist.data().isStomaWorkshop3 === true) {
+                            db.collection(`jornadas`).doc(email).update({ isStoma3AssistDay2: true });
+                            swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Asistencia confirmada',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        } else {
+                            swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'El usuario no se encuentra inscrito en este taller',
+                            });
                         }
-                    });
+                    })
                     break;
             }
 
-            return arr;
+            return true;
 
         } else {
             swal.fire({
@@ -169,7 +161,7 @@ export const fetchWorkshopRegistro = async (email, subtab) => {
                 title: 'Error',
                 text: 'El usuario no fue encontrado',
             });
-            return [];
+            return false;
         }
     } catch (error) {
         console.log(error);
@@ -183,30 +175,12 @@ export const fetchWorkshopRegistro = async (email, subtab) => {
 
 export const fetchRegistro = async (email) => {
     try {
-        let regs = await db.collection(`jornadas`).get();
-        let exists = false
-        let arr = [];
+        const regs = await db.collection(`jornadas`).where('email', '==', email).get();
 
-        regs.forEach(assist => { //verify email in DB
-            if (assist.id == email) {
-                exists = true
-            }
-        })
-
-        if (exists) {
+        if (!regs.empty) {
             if (dnow > registerDay1 && dnow < registerDay2) {
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay1: true });
-
-                regs.forEach(assist => {
-                    arr.push(assist.data());
-                });
-
-                arr.forEach(partner => {
-                    if (partner.email == email) {
-                        partner.isAssistDay1 = true;
-                    }
-                });
 
                 swal.fire({
                     position: 'top-end',
@@ -221,16 +195,6 @@ export const fetchRegistro = async (email) => {
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay2: true });
 
-                regs.forEach(assist => {
-                    arr.push(assist.data());
-                });
-
-                arr.forEach(partner => {
-                    if (partner.email == email) {
-                        partner.isAssistDay2 = true;
-                    }
-                });
-
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -244,16 +208,6 @@ export const fetchRegistro = async (email) => {
 
                 db.collection(`jornadas`).doc(email).update({ isAssistDay3: true });
 
-                regs.forEach(assist => {
-                    arr.push(assist.data());
-                });
-
-                arr.forEach(partner => {
-                    if (partner.email == email) {
-                        partner.isAssistDay3 = true;
-                    }
-                });
-
                 swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -263,7 +217,7 @@ export const fetchRegistro = async (email) => {
                 })
             }
 
-            return arr;
+            return true;
 
         } else {
             swal.fire({
@@ -271,7 +225,7 @@ export const fetchRegistro = async (email) => {
                 title: 'Error',
                 text: 'El usuario no fue encontrado',
             });
-            return [];
+            return false;
         }
 
     } catch (error) {

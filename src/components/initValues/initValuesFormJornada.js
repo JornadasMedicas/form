@@ -30,6 +30,10 @@ export const initValuesRegister = {
     emaildata: ''
 }
 
+export const initValueFetchAssist = {
+    fetchassist: ''
+}
+
 export const initState = {
     t1: false,
     t2: false,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ModulesTableGrid } from './ModulesTableGrid'
+import { PartnerInfo } from './PartnerInfo'
 import { Box, Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Select, Tab, TextField, useMediaQuery } from '@mui/material'
 import { fetchRegistro, fetchWorkshopRegistro } from '../services/registrosHelpers';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
@@ -14,17 +14,12 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import BuildIcon from '@mui/icons-material/Build';
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import AirlineSeatFlatIcon from '@mui/icons-material/AirlineSeatFlat';
-import { MedTableComponent } from './MedTableComponent';
-import { Stoma1TableComponent } from './Stoma1TableComponent';
-import { Stoma2TableComponent } from './Stoma2TableComponent';
-import { Stoma3TableComponent } from './Stoma3TableComponent';
 
 export const Register = () => {
 
     const matches = useMediaQuery('(max-width:900px)');
+    const matches2 = useMediaQuery('(max-width:900px)');
     const { values, handleInputChange, reset } = useFormRegister(initValuesRegister);
-    const [assistModules, setAssistModules] = useState([]);
-    const [assistWorkshop, setAssistWorkshop] = useState([]);
     const [disabled, setDisabled] = useState(true)
     const [tab, setTab] = useState('1');
     const [subtab, setSubtab] = useState('1')
@@ -32,18 +27,15 @@ export const Register = () => {
 
     const fetchQRInvitado = async (email) => {
         let em = email.trim();
-        let info;
 
-        tab === '1' ? info = await fetchRegistro(em) : info = await fetchWorkshopRegistro(em, subtab);
-        tab === '1' ? info.length > 0 && setAssistModules([info]) : info.length > 0 && setAssistWorkshop([info]);
+        tab === '1' ? await fetchRegistro(em) : await fetchWorkshopRegistro(em, subtab);
     }
 
     const fetchManualInvitado = async () => {
         let em = values.emaildata.trim().toUpperCase();
-        const info = await fetchRegistro(em);
 
-        info.length > 0 && setAssistModules([info])
-        reset()
+        tab === '1' ? await fetchRegistro(em) : await fetchWorkshopRegistro(em, subtab);
+        reset();
     }
 
     const handleChange = (event, newValue) => {
@@ -87,39 +79,22 @@ export const Register = () => {
                 {/* MIHO001029IX8|ROJERU.SAN1983@GMAIL.COM|OMAR SAHIB|MIRÓN HERNÁNDEZ| */}
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <Box sx={{ width: '100%', typography: 'body1' }}>
-                    {tab === '1' ?
-                        <>
-                            <Box sx={{ marginBottom: 2 }}>
-                                <h1 className='animate__animated animate__fadeIn' style={{ fontSize: 32 }}>
-                                    <strong style={{ color: '#b7402a' }}>A</strong>sistencia de <strong style={{ color: '#b7402a' }}>M</strong>ódulos
-                                </h1>
-                            </Box>
-                        </>
-                        :
-                        <>
-                            <Box sx={{ marginBottom: 2 }}>
-                                <h1 className='animate__animated animate__fadeInUp' style={{ fontSize: 32 }}>
-                                    <strong style={{ color: '#b7402a' }}>A</strong>sistencia de <strong style={{ color: '#b7402a' }}>T</strong>alleres
-                                </h1>
-                            </Box>
-                        </>}
                     <TabContext value={tab}>
-                        <Box sx={{ borderRadius: 3, boxShadow: 4, marginBottom: 0, width: matches ? '80%' : '40%', marginLeft: 'auto', marginRight: 'auto' }}>
-                            <TabList
-                                TabIndicatorProps={{
-                                    style: {
-                                        backgroundColor: "#bd4f2b"
-                                    }
-                                }}
-                                onChange={handleChange}
-                                aria-label="lab API tabs example"
-                                centered
-                                sx={{ height: '60px' }}
-                            >
-                                <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray' }}>Congreso</span>} value="1" />
-                                <Tab icon={<HandymanIcon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '2' ? 'black' : 'gray' }}>Talleres</span>} value="2" />
-                            </TabList>
-                        </Box>
+                        <TabList
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: "#bd4f2b"
+                                }
+                            }}
+                            onChange={handleChange}
+                            aria-label="lab API tabs example"
+                            variant='scrollable'
+                            scrollButtons={'auto'}
+                            sx={{ maxHeight: 55, borderRadius: 3, boxShadow: 4, ml: 'auto', mr: 'auto', maxWidth: matches ? '80%' : '40%' }}
+                        >
+                            <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray' }}>Congreso</span>} value="1" />
+                            <Tab icon={<HandymanIcon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '2' ? 'black' : 'gray' }}>Talleres</span>} value="2" />
+                        </TabList>
                         {tab === '2'
                             &&
                             <>
@@ -145,162 +120,172 @@ export const Register = () => {
                                     </Box>
                                 </TabContext>
                             </>}
-                        <Box sx={{ borderRadius: 3, boxShadow: 0 }}>
+                        <Box sx={{ borderRadius: 3, boxShadow: 0, marginTop: 1 }}>
                             <TabPanel value="1" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
-                                <Grid item sm={12} xs={12} sx={{ mt: 2, mb: 5 }}>
-                                    <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
-                                        <Grid container rowSpacing={5} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
-                                            <Grid item xs={8}>
-                                                <TextField
-                                                    label='Registro QR'
-                                                    autoComplete='off'
-                                                    name='qrdata'
-                                                    value={values.qrdata}
-                                                    onChange={(e) => handleInputChange(e.target.value, 'qrdata')}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <QrCodeScannerIcon />
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                    sx={{
-                                                        "& label.Mui-focused": {
-                                                            color: "#b7402a"
-                                                        },
-                                                        "& .MuiInput-underline:after": {
-                                                            borderBottomColor: "#b7402a"
-                                                        },
-                                                        width: '300px'
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
+                                <fieldset className='rounded-3' style={{ border: '2px inset #b7402a', borderRadius: '20px' }}>
+                                    <legend className='float-none w-auto px-3'>
+                                        <h1 className='animate__animated animate__fadeIn' style={{ fontSize: 30 }}>
+                                            <strong style={{ color: '#b7402a' }}>R</strong>egistro de <strong style={{ color: '#b7402a' }}>A</strong>sistencia
+                                        </h1>
+                                    </legend>
+                                    <Grid item sm={12} xs={12} sx={{ mt: 0, mb: 5, pb: 0 }}>
+                                        <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
+                                            <Grid container rowSpacing={5} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                                                <Grid item xs={8}>
+                                                    <TextField
+                                                        label='Registro QR'
+                                                        autoComplete='off'
+                                                        name='qrdata'
+                                                        value={values.qrdata}
+                                                        onChange={(e) => handleInputChange(e.target.value, 'qrdata')}
+                                                        InputProps={{
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <QrCodeScannerIcon />
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        sx={{
+                                                            "& label.Mui-focused": {
+                                                                color: "#b7402a"
+                                                            },
+                                                            "& .MuiInput-underline:after": {
+                                                                borderBottomColor: "#b7402a"
+                                                            },
+                                                            width: '300px'
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={8} sx={{ overflow: 'hidden', textAlign: 'center' }}>
+                                                    <TextField
+                                                        label='Registro Manual (email)'
+                                                        autoComplete='off'
+                                                        placeholder='asistente@ejemplo.com'
+                                                        name='email'
+                                                        value={values.emaildata.toUpperCase()}
+                                                        onChange={(e) => handleInputChange(e.target.value, 'emaildata')}
+                                                        InputProps={{
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <PersonAddAlt1Icon />
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        sx={{
+                                                            "& label.Mui-focused": {
+                                                                color: "#b7402a"
+                                                            },
+                                                            "& .MuiInput-underline:after": {
+                                                                borderBottomColor: "#b7402a"
+                                                            },
+                                                            width: '250px'
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                    <Button
+                                                        disabled={disabled}
+                                                        endIcon={<SendIcon />}
+                                                        variant='contained'
+                                                        onClick={fetchManualInvitado}
+                                                        sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: 0, marginTop: 2, marginLeft: 1, width: '95px', height: '30px' }}
+                                                    >
+                                                        Enviar
+                                                    </Button>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={8} sx={{ overflow: 'hidden', textAlign: 'center' }}>
-                                                <TextField
-                                                    label='Registro Manual (email)'
-                                                    autoComplete='off'
-                                                    placeholder='asistente@ejemplo.com'
-                                                    name='email'
-                                                    value={values.emaildata.toUpperCase()}
-                                                    onChange={(e) => handleInputChange(e.target.value, 'emaildata')}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <PersonAddAlt1Icon />
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                    sx={{
-                                                        "& label.Mui-focused": {
-                                                            color: "#b7402a"
-                                                        },
-                                                        "& .MuiInput-underline:after": {
-                                                            borderBottomColor: "#b7402a"
-                                                        },
-                                                        width: '250px'
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
-                                                <Button
-                                                    disabled={disabled}
-                                                    endIcon={<SendIcon />}
-                                                    variant='contained'
-                                                    onClick={fetchManualInvitado}
-                                                    sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: 0, marginTop: 2, marginLeft: 1, width: '95px', height: '30px' }}
-                                                >
-                                                    Enviar
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
-                                </Grid>
-
-                                <Box sx={{ mt: 4 }}>
-                                    <ModulesTableGrid assistModules={assistModules} />
+                                        </Box>
+                                    </Grid>
+                                </fieldset>
+                                <Box sx={{ mt: 5 }}>
+                                    <PartnerInfo />
                                 </Box>
                             </TabPanel>
                             <TabPanel value="2" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
-                                <Grid item sm={12} xs={12} sx={{ mt: 2, mb: 5 }}>
-                                    <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
-                                        <Grid container rowSpacing={5} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
-                                            <Grid item xs={8}>
-                                                <TextField
-                                                    label='Registro QR'
-                                                    autoComplete='off'
-                                                    name='qrdata'
-                                                    value={values.qrdata}
-                                                    onChange={(e) => handleInputChange(e.target.value, 'qrdata')}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <QrCodeScannerIcon />
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                    sx={{
-                                                        "& label.Mui-focused": {
-                                                            color: "#b7402a"
-                                                        },
-                                                        "& .MuiInput-underline:after": {
-                                                            borderBottomColor: "#b7402a"
-                                                        },
-                                                        width: '300px'
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                />
+                                <fieldset className='rounded-3' style={{ border: '2px inset #b7402a', borderRadius: '20px' }}>
+                                    <legend className='float-none w-auto px-3'>
+                                        <h1 className='animate__animated animate__fadeIn' style={{ fontSize: 30 }}>
+                                            <strong style={{ color: '#b7402a' }}>R</strong>egistro de <strong style={{ color: '#b7402a' }}>A</strong>sistencia
+                                        </h1>
+                                    </legend>
+                                    <Grid item sm={12} xs={12} sx={{ mt: 2, mb: 5 }}>
+                                        <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
+                                            <Grid container rowSpacing={5} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
+                                                <Grid item xs={8}>
+                                                    <TextField
+                                                        label='Registro QR'
+                                                        autoComplete='off'
+                                                        name='qrdata'
+                                                        value={values.qrdata}
+                                                        onChange={(e) => handleInputChange(e.target.value, 'qrdata')}
+                                                        InputProps={{
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <QrCodeScannerIcon />
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        sx={{
+                                                            "& label.Mui-focused": {
+                                                                color: "#b7402a"
+                                                            },
+                                                            "& .MuiInput-underline:after": {
+                                                                borderBottomColor: "#b7402a"
+                                                            },
+                                                            width: '300px'
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={8} sx={{ overflow: 'hidden', textAlign: 'center' }}>
+                                                    <TextField
+                                                        label='Registro Manual (email)'
+                                                        autoComplete='off'
+                                                        placeholder='asistente@ejemplo.com'
+                                                        name='email'
+                                                        value={values.emaildata.toUpperCase()}
+                                                        onChange={(e) => handleInputChange(e.target.value, 'emaildata')}
+                                                        InputProps={{
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <PersonAddAlt1Icon />
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        sx={{
+                                                            "& label.Mui-focused": {
+                                                                color: "#b7402a"
+                                                            },
+                                                            "& .MuiInput-underline:after": {
+                                                                borderBottomColor: "#b7402a"
+                                                            },
+                                                            width: '250px'
+                                                        }}
+                                                        variant="standard"
+                                                        fullWidth
+                                                    /* error={errors.matricula?.error}
+                                                    helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
+                                                    inputProps={{ maxLength: 4 }} */
+                                                    />
+                                                    <Button disabled={disabled} endIcon={<SendIcon />} variant='contained' onClick={fetchManualInvitado} sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: 0, marginTop: 2, marginLeft: 1, width: '95px', height: '30px' }}>
+                                                        Enviar
+                                                    </Button>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={8} sx={{ overflow: 'hidden', textAlign: 'center' }}>
-                                                <TextField
-                                                    label='Registro Manual (email)'
-                                                    autoComplete='off'
-                                                    placeholder='asistente@ejemplo.com'
-                                                    name='email'
-                                                    value={values.emaildata.toUpperCase()}
-                                                    onChange={(e) => handleInputChange(e.target.value, 'emaildata')}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <PersonAddAlt1Icon />
-                                                            </InputAdornment>
-                                                        )
-                                                    }}
-                                                    sx={{
-                                                        "& label.Mui-focused": {
-                                                            color: "#b7402a"
-                                                        },
-                                                        "& .MuiInput-underline:after": {
-                                                            borderBottomColor: "#b7402a"
-                                                        },
-                                                        width: '250px'
-                                                    }}
-                                                    variant="standard"
-                                                    fullWidth
-                                                /* error={errors.matricula?.error}
-                                                helperText={errors.matricula?.error ? errors.matricula?.msg : ''}
-                                                inputProps={{ maxLength: 4 }} */
-                                                />
-                                                <Button disabled={disabled} endIcon={<SendIcon />} variant='contained' onClick={fetchManualInvitado} sx={{ backgroundColor: "#ca7757", ":hover": { backgroundColor: '#b7402a' }, marginBottom: -4, marginLeft: 1, width: '95px', height: '30px' }}>
-                                                    Enviar
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
-                                    </Box>
-                                </Grid>
-                                <Box sx={{ mt: 4 }}>
-                                    {subtab === '1' && <MedTableComponent value={assistWorkshop} />}
-                                    {subtab === '2' && <Stoma1TableComponent value={assistWorkshop} />}
-                                    {subtab === '3' && <Stoma2TableComponent value={assistWorkshop} />}
-                                    {subtab === '4' && <Stoma3TableComponent value={assistWorkshop} />}
+                                        </Box>
+                                    </Grid>
+                                </fieldset>
+                                <Box sx={{ mt: 2 }}>
+                                    <PartnerInfo />
                                 </Box>
                             </TabPanel>
                         </Box>
                     </TabContext>
                 </Box>
-            </Box>
+            </Box >
         </>
     )
 }
