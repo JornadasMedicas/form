@@ -32,10 +32,6 @@ export const PartnerInfo = () => { //IMPORTANT!!! use destructuring to aim array
         values.fetchassist !== '' ? setDisabled(false) : setDisabled(true)
     }, [values.fetchassist])
 
-    useEffect(() => {
-        console.log(assistInfo);
-    }, [assistInfo])
-
     return (
         <>
             <fieldset className='rounded-3' style={{ border: '2px inset #ff9900', borderRadius: '20px' }}>

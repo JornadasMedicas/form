@@ -336,7 +336,7 @@ export const Form = () => {
 							renderInput={params => (
 								<TextField
 									{...params}
-									label='Módulo al que asiste (opcional)'
+									label='Módulo al que asiste *'
 									inputProps={{
 										...params.inputProps,
 										autoComplete: 'off'
@@ -347,7 +347,7 @@ export const Form = () => {
 							)}
 						/>
 					</Grid>
-					<Grid container rowSpacing={0} columns={2} item sx={{ mt: 2 }}>
+					{/* <Grid container rowSpacing={0} columns={2} item sx={{ mt: 2 }}>
 						<fieldset className='rounded-3' style={{ border: '2px inset #5dadb6', borderRadius: '20px' }}>
 							<legend className='float-none w-auto px-3'>Talleres Medicina</legend>
 							<Grid item xs={2} sx={{ textAlign: 'left', paddingLeft: 5, paddingBottom: 2 }}>
@@ -362,7 +362,7 @@ export const Form = () => {
 								<Checkbox disabled={true} checked={checkValue.t4} onChange={(e) => assistWorkshop(4, e)} /><b>24 de Noviembre</b> - Cirugía Maxilofacial en Cuba - <b style={{ color: 'red' }}>cupos agotados</b>
 							</Grid>
 						</fieldset>
-					</Grid>
+					</Grid> */}
 
 					<hr />
 
