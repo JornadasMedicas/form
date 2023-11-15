@@ -15,7 +15,7 @@ export const Medicine = () => {
             <Box sx={{ paddingLeft: 0, paddingRight: 0, marginBottom: matches ? '110px' : '80px', marginTop: '-10px' }}>
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <h1 className='fonts animate__animated animate__fadeInDown' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>M</strong>edicina<strong></strong></h1>
-                <img style={{ marginTop: 5, marginBottom: matches ? '0px' : '-10px'}} width={'100%'} height={'auto'} src='https://i.imgur.com/32oX6M4.png'></img>
+                <img style={{ marginTop: 5, marginBottom: matches ? '0px' : '-10px'}} width={'100%'} height={'auto'} src='https://i.imgur.com/C7RbqQ2.jpg'></img>
                 <Return />
                 <CountdownComponent />
             </Box>
