@@ -116,10 +116,10 @@ export const HomePage = () => {
                 <Box sx={{ flexGrow: 1, marginTop: 3, marginBottom: 3 }}>
                     <Grid container rowSpacing={3} columns={matches ? 1 : 16} sx={{ flexDirection: { xs: "column", md: "row" } }}>
                         <Grid className='anima' item xs={8} sx={{ transition: 'all 0.3s ease', ":hover": { cursor: 'pointer' }}}>
-                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/XYWN29u.png'></img>
+                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/Vs7JH8v.png'></img>
                         </Grid>
                         <Grid className='anima' item xs={8} sx={{ transition: 'all 0.3s ease', ":hover": { cursor: 'pointer' } }}>
-                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/w9b87Bp.png'></img>
+                            <img width={'95%'} height={'auto'} src='https://i.imgur.com/T6cgXuV.jpg'></img>
                         </Grid>
                     </Grid>
                     <CountdownComponent />
