@@ -1,9 +1,9 @@
 import { db, db2 } from '../firebase/firebase-config';
 import swal from 'sweetalert2';
 
-const registerDay1 = new Date("November 08, 2023");
-const registerDay2 = new Date("November 09, 2023");
-const registerDay3 = new Date("November 10, 2023");
+const registerDay1 = new Date("November 23, 2023");
+const registerDay2 = new Date("November 24, 2023");
+const registerDay3 = new Date("November 25, 2023");
 const dnow = Date.now();
 
 export const saveRegistro = async (values) => {

@@ -15,7 +15,7 @@ export const Chemicals = () => {
             <Box sx={{ paddingLeft: 0, paddingRight: 0, marginBottom: matches ? '110px' : '80px', marginTop: '-10px' }}>
                 <hr style={{ width: '95%', marginLeft: 'auto', marginRight: 'auto' }} />
                 <h1 className='fonts animate__animated animate__fadeInDown' style={{ fontSize: 32 }}><strong style={{ color: '#b7402a' }}>Q</strong>uímicos<strong></strong></h1>
-                <img style={{ marginTop: 5, marginBottom: 10}} width={'100%'} height={'auto'} src='https://i.imgur.com/klaPVhl.png'></img>
+                <img style={{ marginTop: 5, marginBottom: 10}} width={'100%'} height={'auto'} src='https://i.imgur.com/yV0CEtC.png'></img>
                 <Return></Return>
                 <CountdownComponent />
             </Box>

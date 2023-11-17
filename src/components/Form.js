@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, FormControl, FormControlLabel, Grid, InputLabel, ListItemText, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, FormControl, FormControlLabel, Grid, InputLabel, ListItemText, MenuItem, Select, TextField, Typography, useMediaQuery } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import useForm2 from '../hooks/useForm2'
 import swal from 'sweetalert2';
@@ -23,6 +23,7 @@ export const Form = () => {
 	const [checkValue, setCheckValue] = useState(initState);
 	const [cupos, setCupos] = useState({})
 	const captcha = useRef(null);
+	const matches = useMediaQuery('(max-width:900px)');
 
 
 	const enableButton = (values, talleres) => {
@@ -185,7 +186,7 @@ export const Form = () => {
 
 	return (
 		<>
-			<Box className='animate__animated animate__fadeIn' sx={{ p: 2, marginBottom: '80px' }}>
+			<Box className='animate__animated animate__fadeIn' sx={{ p: 2, marginBottom: matches ? '120px' : '80px' }}>
 				<Typography sx={{ textAlign: 'left', mb: 2, fontWeight: 'bold' }}> Sede del evento:
 				</Typography>
 				<Typography sx={{ textAlign: 'center', mb: 1, fontWeight: 'bold' }}>

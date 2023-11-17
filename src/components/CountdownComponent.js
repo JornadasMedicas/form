@@ -21,7 +21,7 @@ export const CountdownComponent = () => {
 
   return (
     <>
-        <Box sx={{ marginTop: 7 }}>
+        <Box sx={{ marginTop: 4 }}>
             <Typography sx={{ fontSize: 24, fontFamily: 'heebo',  display: display}}>
                 {display === 1 ? 
                 <>
@@ -32,7 +32,7 @@ export const CountdownComponent = () => {
                     ¡<b style={{ fontSize: '28px', color: '#b7402a'}}>E</b>L REGISTRO ESTÁ DISPONIBLE!
                 </>}
             </Typography>
-            <Grid sx={{ marginTop: 3}}>
+            <Grid sx={{ marginTop: 2}}>
                 <Link style={{ pointerEvents: pointeraction }} to={'/form'}>
                     <Button disabled={disabled} variant="contained" endIcon={<SendIcon />} sx={{ backgroundColor: '#da9d81', ":hover": { backgroundColor: '#b9482a' }, width: matches ? '80%' : '45%' }}>
                         Registro

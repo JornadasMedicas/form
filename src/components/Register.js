@@ -21,7 +21,7 @@ export const Register = () => {
     const matches2 = useMediaQuery('(max-width:900px)');
     const { values, handleInputChange, reset } = useFormRegister(initValuesRegister);
     const [disabled, setDisabled] = useState(true)
-    const [tab, setTab] = useState('1');
+    const [tab, setTab] = useState('2');
     const [subtab, setSubtab] = useState('1')
 
 
@@ -87,12 +87,11 @@ export const Register = () => {
                                 }
                             }}
                             onChange={handleChange}
-                            aria-label="lab API tabs example"
                             variant='scrollable'
-                            scrollButtons={'auto'}
-                            sx={{ maxHeight: 55, borderRadius: 3, boxShadow: 4, ml: 'auto', mr: 'auto', maxWidth: matches ? '80%' : '40%' }}
+                            aria-label="lab API tabs example"
+                            sx={{ maxHeight: 55, borderRadius: 3, boxShadow: 4, ml: 'auto', mr: 'auto', maxWidth: matches ? '80%' : '25%' }}
                         >
-                            <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray' }}>Congreso</span>} value="1" />
+                            {/* <Tab icon={<Groups2Icon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '1' ? 'black' : 'gray' }}>Congreso</span>} value="1" /> */}
                             <Tab icon={<HandymanIcon color="action" />} iconPosition='start' sx={{ fontWeight: 'bold', paddingTop: 0 }} label={<span style={{ color: tab === '2' ? 'black' : 'gray' }}>Talleres</span>} value="2" />
                         </TabList>
                         {tab === '2'
@@ -121,7 +120,7 @@ export const Register = () => {
                                 </TabContext>
                             </>}
                         <Box sx={{ borderRadius: 3, boxShadow: 0, marginTop: 1 }}>
-                            <TabPanel value="1" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
+                            {/* <TabPanel value="1" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
                                 <fieldset className='rounded-3' style={{ border: '2px inset #b7402a', borderRadius: '20px' }}>
                                     <legend className='float-none w-auto px-3'>
                                         <h1 className='animate__animated animate__fadeIn' style={{ fontSize: 30 }}>
@@ -202,7 +201,7 @@ export const Register = () => {
                                 <Box sx={{ mt: 5 }}>
                                     <PartnerInfo />
                                 </Box>
-                            </TabPanel>
+                            </TabPanel> */}
                             <TabPanel value="2" sx={{ paddingLeft: 0, paddingRight: 0, paddingBottom: 0 }}>
                                 <fieldset className='rounded-3' style={{ border: '2px inset #b7402a', borderRadius: '20px' }}>
                                     <legend className='float-none w-auto px-3'>

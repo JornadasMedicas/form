@@ -9,7 +9,7 @@ export const Return = () => {
 
   return (
     <>
-        <Grid item sx={{marginLeft: matches ? '-65%' : '-78%', marginBottom: '20px'}}>
+        <Grid item sx={{marginLeft: matches ? '-65%' : '-78%', paddingTop: '20px'}}>
             <Link to={'/home'}>
                 <Button variant="contained" startIcon={<ReplyOutlinedIcon/>} sx={{ backgroundColor: '#da9d81', ":hover": {backgroundColor: '#b9482a'}}}>
                     Regresar
