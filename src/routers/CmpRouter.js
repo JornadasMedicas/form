@@ -80,30 +80,6 @@ export const CmpRouter = () => {
                                 component={ Chemicals }
                             />
 
-                            {/* <Route
-                                exact
-                                path="/medworkshop"
-                                component={ Medworkshop }
-                            />
-
-                            <Route
-                                exact
-                                path="/restorationworkshop"
-                                component={ Stomaworkshop1 }
-                            />
-
-                            <Route
-                                exact
-                                path="/techniquesworkshop"
-                                component={ Stomaworkshop2 }
-                            />
-
-                            <Route
-                                exact
-                                path="/surgeryworkshop"
-                                component={ Stomaworkshop3 }
-                            /> */}
-
                             <Redirect to="/home"/>
                         </Switch>
                     </div>
