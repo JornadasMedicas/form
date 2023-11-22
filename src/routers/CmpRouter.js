@@ -11,7 +11,7 @@ import { Chemicals } from '../components/Chemicals';
 
 export const CmpRouter = () => {
 
-    const registerDay = new Date("November 03, 2023 09:00:00");
+    const registerDay = new Date("November 03, 2023 21:00:00");
     const dnow = Date.now();
     
   return (
@@ -35,11 +35,11 @@ export const CmpRouter = () => {
                                 component={ GenerateQR }
                             /> */}
 
-                            {/* <Route 
+                            <Route 
                                 exact
                                 path="/register"
                                 component={ Register }
-                            /> */}
+                            />
 
                             {
                             dnow > registerDay && 

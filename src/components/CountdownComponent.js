@@ -17,7 +17,7 @@ export const CountdownComponent = () => {
         setDisplay(2);
     }
 
-    const registerDay = new Date("November 03, 2023 09:00:00");
+    const registerDay = new Date("November 03, 2023 21:00:00");
 
   return (
     <>
@@ -25,7 +25,7 @@ export const CountdownComponent = () => {
             <Typography sx={{ fontSize: 24, fontFamily: 'heebo',  display: display}}>
                 {display === 1 ? 
                 <>
-                    ¡<b style={{ fontSize: '28px', color: '#b7402a'}}>I</b>NICIA TU REGISTRO A PARTIR DEL 3 DE NOVIEMBRE DEL 2023! <br/> <p>FALTAN <b style={{ color: 'red' }}><Countdown date={registerDay} onComplete={countdownAction}/></b> DÍAS</p>
+                    ¡<b style={{ fontSize: '28px', color: '#b7402a'}}>E</b>L REGISTRO SE HABILITARÁ PRONTO NUEVAMENTE! <br/> <p>FALTAN <b style={{ color: 'red' }}><Countdown date={registerDay} onComplete={countdownAction}/></b> HORAS</p>
                 </> 
                 :
                 <>
