@@ -3,10 +3,10 @@ import { initValuesFormJordanaErrors } from "../components/initValues/initValues
 function validateEmail(email) {
 
     // Get our input reference.
-    var emailField = email
+    let emailField = email
 
     // Define our regular expression.
-    var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    var validEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/;
 
     // Using test we can check if the text match the pattern
     if (validEmail.test(emailField)) {
