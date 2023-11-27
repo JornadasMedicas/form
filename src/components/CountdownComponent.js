@@ -21,7 +21,7 @@ export const CountdownComponent = () => {
 
   return (
     <>
-        <Box sx={{ marginTop: 4 }}>
+        {/* <Box sx={{ marginTop: 4 }}>
             <Typography sx={{ fontSize: 24, fontFamily: 'heebo',  display: display}}>
                 {display === 1 ? 
                 <>
@@ -39,7 +39,7 @@ export const CountdownComponent = () => {
                     </Button>
                 </Link>
             </Grid>
-        </Box>
+        </Box> */}
     </>
   )
 }

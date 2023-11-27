@@ -35,11 +35,11 @@ export const CmpRouter = () => {
                                 component={ GenerateQR }
                             /> */}
 
-                            <Route 
+                            {/* <Route 
                                 exact
                                 path="/register"
                                 component={ Register }
-                            />
+                            /> */}
 
                             {
                             dnow > registerDay && 
