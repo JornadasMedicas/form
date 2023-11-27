@@ -41,14 +41,14 @@ export const CmpRouter = () => {
                                 component={ Register }
                             /> */}
 
-                            {
+                            {/* {
                             dnow > registerDay && 
                             <Route
                                 exact
                                 path="/form"
                                 component={ Form }
                             />
-                            }
+                            } */}
 
                             <Route
                                 exact
